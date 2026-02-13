@@ -1,3 +1,8 @@
+# Participantes
+* Juan Camilo Posso Guevara
+* Juan Sebastian Buitrago Piñeros
+* Richard Santiago Urrea Garcia
+
 # Informe de Deuda Técnica para `social-neighborhood-front-end`
 
 ## 1. Problemas de Arquitectura
