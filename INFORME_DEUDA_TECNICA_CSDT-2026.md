@@ -5,6 +5,21 @@
 
 # Informe de Deuda Técnica para `social-neighborhood-front-end`
 
+## Tabla de Contenidos
+
+- [1) Principios de programación: conclusiones de lo que NO se cumple (o está en riesgo)](#1-principios-de-programación-conclusiones-de-lo-que-no-se-cumple-o-está-en-riesgo)
+  - [KISS (Keep it Simple)](#kiss-keep-it-simple)
+  - [YAGNI (You Aren’t Gonna Need It)](#yagni-you-aren’t-gonna-need-it)
+  - [DRY (Don’t Repeat Yourself)](#dry-don’t-repeat-yourself)
+  - [SOLID (como guía)](#solid-como-guía)
+- [2) Prácticas XP que aplicaríamos para mejorar calidad](#2-prácticas-xp-que-aplicaríamos-para-mejorar-calidad)
+  - [1) Refactor continuo (Boy Scout en serio)](#1-refactor-continuo-boy-scout-en-serio)
+  - [2) TDD (o al menos test-first) en partes nuevas](#2-tdd-o-al-menos-test-first-en-partes-nuevas)
+  - [3) Integración Continua fuerte (CI)](#3-integración-continua-fuerte-ci)
+  - [4) Pair programming](#4-pair-programming)
+- [3) Backlog de acciones (cosas concretas para mejorar el proyecto)](#3-backlog-de-acciones-cosas-concretas-para-mejorar-el-proyecto)
+
+
 ## 1. Problemas de Arquitectura
 
 ### 1.1 Falta de Modularización
@@ -224,7 +239,3 @@ export const useFetchData = (url) => {
 6. *No versionar build/* si se confirma que es output generado.
 
 ---
-
-## Conclusión
-
-Abordar estos problemas mejorará significativamente la mantenibilidad, escalabilidad y testabilidad del proyecto `social-neighborhood-front-end`. Priorizar la refactorización de áreas de alto riesgo e introducir pruebas para prevenir regresiones.
