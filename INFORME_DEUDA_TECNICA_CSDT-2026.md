@@ -10,6 +10,7 @@
 ### 1.1 Falta de Modularización
 - **Observación**: El proyecto mezcla lógica de negocio, componentes de UI y llamadas a la API acoplados dentro de los componentes de React (por ejemplo, `DropForm.js`, `ZonasComunes/index.js`).
 - **Impacto**: Esto dificulta el mantenimiento, las pruebas y la escalabilidad del código.
+
 - **Recomendación**: Separar las responsabilidades introduciendo capas:
   - **Capa de UI**: Enfocada en el renderizado y las interacciones del usuario.
   - **Capa de Servicios**: Manejo de llamadas a la API y lógica de negocio.
