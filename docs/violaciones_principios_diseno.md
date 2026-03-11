@@ -23,3 +23,5 @@
 - **Ejemplo**: Renderizado condicional complejo en `DropForm.js` y `ZonasComunes/index.js` (por ejemplo, operadores ternarios anidados).
 - **Impacto**: La legibilidad del código se reduce, dificultando la depuración.
 - **Recomendación**: Simplificar los condicionales dividiéndolos en funciones más pequeñas.
+
+[⬅ Volver al Índice Principal](../README.md)

@@ -24,3 +24,5 @@
 - **Observación**: Componentes como `DropForm` y `DropDeepForm` están fuertemente acoplados con sus componentes padre.
 - **Impacto**: Los cambios en un componente pueden tener efectos en cascada.
 - **Recomendación**: Desacoplar los componentes usando props y contextos de manera efectiva.
+
+[⬅ Volver al Índice Principal](../README.md)

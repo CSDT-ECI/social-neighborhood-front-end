@@ -72,3 +72,5 @@ export const useFetchData = (url) => {
 ### 6.5 Mejorar la Cobertura de Pruebas
 - **Objetivo**: Componentes críticos como `DropForm`, `ZonasComunes`.
 - **Acción**: Escribir pruebas unitarias e integrales.
+
+[⬅ Volver al Índice Principal](../README.md)

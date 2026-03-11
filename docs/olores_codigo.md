@@ -23,3 +23,5 @@
 - **Ejemplo**: Declaraciones de depuración `console.log` presentes en múltiples archivos (por ejemplo, `DropForm.js`, `Rightbar/index.js`).
 - **Impacto**: Los logs innecesarios pueden saturar la consola y exponer datos sensibles.
 - **Recomendación**: Eliminar las declaraciones `console.log` o usar una biblioteca de registro (por ejemplo, Winston).
+
+[⬅ Volver al Índice Principal](../README.md)

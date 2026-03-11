@@ -44,3 +44,5 @@
 ### SOLID (como guía)
 - *SRP y DIP* son los que más suelen romperse en React cuando no hay separación de capas.
 - *Mejora concreta:* mover integración (API/Firebase) a servicios y dejar componentes más “limpios”.
+
+[⬅ Volver al Índice Principal](../README.md)

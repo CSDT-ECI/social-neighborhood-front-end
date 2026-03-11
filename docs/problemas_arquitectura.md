@@ -28,3 +28,5 @@
 - **Observación**: El estado se gestiona localmente en los componentes usando `useState` y `useEffect`, lo que lleva a duplicaciones (por ejemplo, `currentUser`, `currentConjunto`).
 - **Impacto**: El estado compartido es difícil de gestionar y sincronizar entre componentes.
 - **Recomendación**: Introducir una solución de gestión de estado global (por ejemplo, Redux, Context API).
+
+[⬅ Volver al Índice Principal](../README.md)

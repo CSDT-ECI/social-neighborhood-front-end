@@ -18,3 +18,5 @@
 - **Observación**: Las llamadas a la API están directamente incrustadas en los componentes (por ejemplo, `axios.get` en `DropForm.js`).
 - **Impacto**: Esto dificulta la simulación de dependencias durante las pruebas.
 - **Recomendación**: Abstraer las llamadas a la API en una capa de servicios para habilitar la simulación.
+
+[⬅ Volver al Índice Principal](../README.md)
