@@ -7,7 +7,7 @@
 
 ## Tabla de Contenidos
 
-1. [Introducción y Participantes](./README.md)
+1. [Introducción y Participantes](./INFORME_DEUDA_TECNICA_CSDT-2026.md)
 2. [Problemas de Arquitectura](./docs/problemas_arquitectura.md)
 3. [Violaciones de Principios de Diseño](./docs/violaciones_principios_diseno.md)
 4. [Olores de Código](./docs/olores_codigo.md)
