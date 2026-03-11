@@ -73,4 +73,4 @@ export const useFetchData = (url) => {
 - **Objetivo**: Componentes críticos como `DropForm`, `ZonasComunes`.
 - **Acción**: Escribir pruebas unitarias e integrales.
 
-[⬅ Volver al Índice Principal](../README.md)
+[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)

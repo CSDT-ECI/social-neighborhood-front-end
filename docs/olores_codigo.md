@@ -24,4 +24,4 @@
 - **Impacto**: Los logs innecesarios pueden saturar la consola y exponer datos sensibles.
 - **Recomendación**: Eliminar las declaraciones `console.log` o usar una biblioteca de registro (por ejemplo, Winston).
 
-[⬅ Volver al Índice Principal](../README.md)
+[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)

@@ -24,4 +24,4 @@
 - **Impacto**: La legibilidad del código se reduce, dificultando la depuración.
 - **Recomendación**: Simplificar los condicionales dividiéndolos en funciones más pequeñas.
 
-[⬅ Volver al Índice Principal](../README.md)
+[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)

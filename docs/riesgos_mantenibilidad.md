@@ -25,4 +25,4 @@
 - **Impacto**: Los cambios en un componente pueden tener efectos en cascada.
 - **Recomendación**: Desacoplar los componentes usando props y contextos de manera efectiva.
 
-[⬅ Volver al Índice Principal](../README.md)
+[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)

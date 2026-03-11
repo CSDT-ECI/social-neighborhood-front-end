@@ -19,4 +19,4 @@
 - **Impacto**: Esto dificulta la simulación de dependencias durante las pruebas.
 - **Recomendación**: Abstraer las llamadas a la API en una capa de servicios para habilitar la simulación.
 
-[⬅ Volver al Índice Principal](../README.md)
+[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
