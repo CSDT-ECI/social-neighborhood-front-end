@@ -33,6 +33,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
@@ -54,5 +55,12 @@
     },
     "optionalDependencies": {
         "fsevents": "^2.3.2"
+    },
+    "overrides": {
+        "@babel/core": "^7.28.0"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^12.1.5"
     }
 }
