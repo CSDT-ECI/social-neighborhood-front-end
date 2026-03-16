@@ -17,3 +17,4 @@
 8. [Características de Clean Code y Principios de Programación](./docs/principios_clean_code.md)
 9. [Prácticas XP y Backlog de Acciones](./docs/practicas_xp_backlog.md)
 10. [Testing Debt](./docs/deuda_tecnica.md)
+11. [Análisis de Calidad y Herramientas Automatizadas](./CSDT_PrimeraEntrega.md)
