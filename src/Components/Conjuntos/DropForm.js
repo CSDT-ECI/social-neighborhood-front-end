@@ -11,7 +11,6 @@ import SendIcon from '@mui/icons-material/Send';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
-import { getRadioUtilityClass } from "@mui/material";
 
 const defaultState = {
     ans:''
@@ -24,14 +23,13 @@ const DropForm = ({param,param2,param3,stringStr,
                     level}) => {
     const [datas,setDatas] = useState([]);
     const [currentItem,setCurrentItem] = useState(0);
-    const [datas2,setDatas2] = useState([]);
     const [loading,setIsloading] =useState(false);
     const [enablesubmit2,sertenablesubmit2] =useState(false);
 
     const getStringDataLocation =()=>{
         let str =''
 
-        currentUsuario?.tipoUsuario == 'Residente' ? 
+        currentUsuario?.tipoUsuario === 'Residente' ? 
         str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
         : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
         return str;
@@ -65,11 +63,11 @@ const DropForm = ({param,param2,param3,stringStr,
         // // enviar datos al back
         setIsloading(true)
         let body ={}
-        if (param2 == "newTipoAgrupacion")
+        if (param2 === "newTipoAgrupacion")
             body={
                 idconjunto:currentConjunto.idconjunto,
                 idTipoAgrupacion:currentItem}
-        if (param2 == "newInmueble")
+        if (param2 === "newInmueble")
             body={
             idconjunto:currentConjunto.idconjunto,
             idTipoInmueble: currentItem}
@@ -101,7 +99,7 @@ const DropForm = ({param,param2,param3,stringStr,
         <div>
                 <div>
                 <Box component="form" onSubmit={handleSubmit} noValidate> 
-                {datas.length!=0?
+                {datas.length!==0?
                     <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
                         onChange={Togglesubmit2} >
                             {param=='unidadesDeViviendaConjuto'?
@@ -152,7 +150,7 @@ const DropForm = ({param,param2,param3,stringStr,
                 enableSubmit?
                 <Box textAlign='center'>
                     {
-                        loading || datas.length==0?
+                        loading || datas.length===0?
                         <LoadingButton loading loadingPosition="start" startIcon={<CircularProgress size={14} />} variant="outlined">Loading..</LoadingButton>
                         :
                         enablesubmit2?

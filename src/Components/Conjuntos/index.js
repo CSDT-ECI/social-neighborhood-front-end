@@ -5,18 +5,13 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
 import './conjuntos.css';
 import DropForm from './DropForm';
 
-import axios from 'axios';
-import Swal from "sweetalert2";
-
 const Conjuntos = ({user, conjunto}) => {
     const [isAgrupacion,setIsAgrupacion] = useState(false);
     const [isInmueble,setIsInmueble] = useState(false);
-    const [isEnableButton,setEnableButton] = useState(true);
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -80,6 +75,7 @@ const Conjuntos = ({user, conjunto}) => {
                 <Grid item xs={6}>
                 <Paper >  
                         <img
+                            alt='Conjunto'
                             src="/conjunto.png" 
                             className="image"
                         />

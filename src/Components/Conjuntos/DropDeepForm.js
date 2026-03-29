@@ -18,35 +18,10 @@ const defaultState = {
     costoAdministracion:''
 };
 const defaultState0 = [];
-const defaultState3 = {};
-const defaultState2 = {
-    id:'',
-    idAgrupacion:'',
-    idTipoInmuebleConjunto:'',
-    numInmueble:'',
-    costoAdministracion:''
-};
+
 const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
-    const [data,setData]= useState(defaultState0)
     const [datas,setDatas]= useState([])
-    const [viviendas,setViviendas]= useState([defaultState])
-    const vivienda ={
-        id:'',
-        conjunto:'',
-        tipoAgrupacion:'',
-        numeroAgrupacion:'',
-        tipoInmueble:'',
-        numeroInmueble:'',
-        costoAdministracion:''
-    }
-    const handleOnChange = (index, name, value) => {
-        const copyRows = [...viviendas];
-        copyRows[index] = {
-          ...copyRows[index],
-          [name]: value
-        };
-        setDatas(copyRows);
-      };
+
     const fetchData = useCallback(async () => {
             // get unidades de vivienda by Email
             await axios.get(window.$dir+location+`/`+ param
@@ -104,12 +79,12 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
                                 <MenuItem id={uVivienda.idunidaddevivienda}
                                         key ={uVivienda.idunidaddevivienda}
                                         name={uVivienda.idunidaddevivienda} 
-                                        value={uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!='null'?uVivienda.numagrupacion:'')+" "+
+                                        value={uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!=='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!='null'?uVivienda.numagrupacion:'')+" "+
                                         uVivienda.tipoinmueble+" "+uVivienda.numinmueble
                                                 }
                                         onClick= {(e)=> onChange(uVivienda)}
                                         >
-                                    {uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!='null'?uVivienda.numagrupacion:'')+" "+
+                                    {uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!=='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!=='null'?uVivienda.numagrupacion:'')+" "+
                                                 uVivienda.tipoinmueble+" "+uVivienda.numinmueble}
                                 </MenuItem>        
                             )                 

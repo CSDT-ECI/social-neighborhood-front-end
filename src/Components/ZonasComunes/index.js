@@ -1,14 +1,11 @@
-import React,{useState} from 'react'
-import MenuItem from '@mui/material/MenuItem';
+import {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
-import SaveTwoToneIcon from '@mui/icons-material/SaveTwoTone';
 import DropForm from '../Conjuntos/DropForm';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -20,11 +17,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import Swal from "sweetalert2";
 
-
-const defaultState = {
-        tipoAgrupacion: {},
-        tipoInmueble: {}
-    }
 const ZonasComunes = ({conjunto,user,currentVivienda}) => {
 
 const [current,setCurrent] = useState({
@@ -83,27 +75,16 @@ const handleSubmit = (event) => {
         tipoAgrupacion: '',
         tipoInmueble: ''
         });
-    const [isEnableButtons,setEnableButtons] = useState(false);
 
     const [isNext,setNext] = useState(false);
 
 
-    const [isAgrupacion,setIsAgrupacion] = useState(false);
     const [isUnidad,setIsUnidad] = useState(false);
     const toggleAgrupacion =()=>{
         setIsAgrupacion(true);
         setIsUnidad(false);
         }
-    const toggleNext =()=>{
-            if(!isNext && !isUnidad){
-            setNext(true);
-            toggleUnidad();
-            }else{
-            setNext(false);
-            setIsAgrupacion(false);
-            setIsUnidad(false);
-            }
-        }
+
     const toggleUnidad =()=>{
         setIsAgrupacion(false);
         setIsUnidad(true);
@@ -116,24 +97,7 @@ const handleSubmit = (event) => {
         });
         console.log(currentConjuntoData)
     };
-    const handleButtons =(e)=>{
-        handleChange(e.target.id);
-        setEnableButtons(true);
-        axios.get(`https://socialneighborhood.herokuapp.com/admin/`+currentConjuntoData.idConjunto+`/tipoAgrupacion`
-            ).then(res =>{     
-                handleChange(res.data);
-                toggleAgrupacion();
-            }).catch(
-                e =>{console.log("No se encuentra tipo agrupacion: "+e)}
-            )
-        axios.get(`https://socialneighborhood.herokuapp.com/admin/`+currentConjuntoData.idConjunto+`/tipoInmueble`
-        ).then(res =>{   
-            handleChange(res.data);
-            toggleUnidad();
-        }).catch(
-            e =>{console.log("No se encuentra tipo inmueble: "+e)}
-        )
-    }
+    
         const [nValues,setNvalues]= useState({
             nVivienda:'',
             nAgrupacion:''
@@ -156,6 +120,7 @@ const handleSubmit = (event) => {
                 <Grid item xs={4}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/sport1.png" 
                                 heigh="270px" width="270px"
                             />
@@ -164,6 +129,7 @@ const handleSubmit = (event) => {
                 <Grid item xs={4}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/sport2.png" 
                                 heigh="270px" width="270px"
                             />
@@ -172,6 +138,7 @@ const handleSubmit = (event) => {
                 <Grid item xs={4}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/sport3.png" 
                                 heigh="270px" width="270px"
                             />

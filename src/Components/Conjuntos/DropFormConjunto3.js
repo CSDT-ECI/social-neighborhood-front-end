@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-
+import React, { useState} from "react";
 import axios from 'axios';
-import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import DropFormConjunto2 from '../Conjuntos/DropFormConjunto2';
@@ -21,20 +19,6 @@ const DropFormConjunto3 = ({param,param2,param3,
         numInmueble:'',
         costoAdministracion:''
     });
-
-    const [loading,setIsloading] =useState(false);
-    const [enablesubmit2,sertenablesubmit2] =useState(false);
-        const daticos =[]
-    const getStringDataLocation =()=>{
-        let str =''
-        currentUsuario?.tipoUsuario == 'Residente' ? 
-        str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
-        : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
-        return str;
-    }
-    const Togglesubmit2 =()=>{
-        sertenablesubmit2(true)
-    }
 
 const toggleAgrupacion =(message)=>{
     const ans = message.idItem;

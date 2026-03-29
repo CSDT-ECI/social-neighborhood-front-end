@@ -1,23 +1,14 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 import { useHistory } from 'react-router-dom';
-import { Grid,Paper, Avatar, TextField, Button, Typography,Link,MenuItem } from '@material-ui/core'
+import { Grid,Paper, Avatar, TextField, Button } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-
 import Swal from 'sweetalert2';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
 import FormControl from '@material-ui/core/FormControl';
-import DropForm from '../../Components/Conjuntos/DropForm';
 import DropDeepForm from '../../Components/Conjuntos/DropDeepForm';
 import DropFormConjunto from '../../Components/Conjuntos/DropFormConjunto';
 import axios from 'axios';
-import {Users} from '../../testData';
 import './login.css';
 const Login=()=>{
 
@@ -37,16 +28,8 @@ const Login=()=>{
         console.log(currentViviendaData);
     };
 
-    const [showPassword,setShowPassword] = useState(false);
-    const toggleShowPassword =()=>{
-        setShowPassword(!showPassword);
-    }
-    const [dashboard,setDashboard] = useState('Administrador');
+    const [showPassword] = useState(false);
 
-    const [residencia,setResidencia] = useState('vivienda');
-    const toggleResidencia =(e)=>{
-        setResidencia(e.target.value);
-    }
     const[currentUserData,setCurrentUserData] =useState([])
 
     const sendCache =(rol)=>{
@@ -75,7 +58,7 @@ const Login=()=>{
         });
     }
     const handleUser = (e) =>{
-        const { name, value } = e.target;
+        const { value } = e.target;
         //hacer solicitud al back del usuario actual
         if (/\S+@\S+\.\S+/.test(value)) {
             axios.get(window.$dir+`social/userByEmail/` + value

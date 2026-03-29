@@ -11,8 +11,6 @@ import SendIcon from '@mui/icons-material/Send';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
-import { getRadioUtilityClass } from "@mui/material";
-import { getTypeByValue } from "@mui/utils/integerPropType";
 
 const DropFormConjunto2 = ({param,param2,param3,param4,
                     location,location2,location3,
@@ -29,8 +27,6 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
     });
 
     const [loading,setIsloading] =useState(false);
-    const [enablesubmit2,sertenablesubmit2] =useState(false);
-        const daticos =[]
     const getStringDataLocation =()=>{
         let str =''
         currentUsuario?.tipoUsuario == 'Residente' ? 
@@ -38,16 +34,13 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
         : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
         return str;
     }
-    const Togglesubmit2 =()=>{
-        sertenablesubmit2(true)
-    }
     const ayuda=(res,currentstr)=>{
         axios.all(res?.map(function(result){
             console.log(result)
             let str = result.idTipoAgrupacion?result.idTipoAgrupacion:result.idtipoagrupacionconjunto?result.idtipoagrupacionconjunto+`/`+currentstr:result.idTipoInmueble
             return axios.get(window.$dir+location2+`/`+ param3+`/`+ str)
             .then(function(response){
-                if(level && level==2){
+                if(level && level===2){
                     return  axios.get(window.$dir+location3+`/`+ param4+`/`+ response.data.idTipoAgrupacion)
                     .then(function(response){
                         return  response.data
@@ -128,7 +121,7 @@ const handleOnChange = (name, value) => {
                 <Box component="form" onSubmit={handleSubmit} noValidate> 
                 <Grid container spacing={2} justifyContent="center" alignItems="flex-start" >   
                     <Grid item xs={8} > 
-                        {datas2?.length!=0?
+                        {datas2?.length!==0?
                             <TextField variant="outlined" id="select" label={param} select required fullWidth
                                  >
                                     { 
@@ -167,7 +160,7 @@ const handleOnChange = (name, value) => {
                     enableSubmit?
                     <Box textAlign='center'>
                         {
-                            (current.idItem!='' && current.nItem!='' && !loading) ?
+                            (current.idItem!=='' && current.nItem!=='' && !loading) ?
                             <Button type="submit" variant="contained" color="success"endIcon={<SendIcon />}>Confirmar</Button>
                             :<div></div>
                         }{
