@@ -54,9 +54,12 @@ jobs:
         with:
           project: "Proyecto CI"
           scan: "./"
+          format: "HTML"
+          out: "dependency-check-report"
 
-      # 8. ChatOps (Notificación en Slack/Teams)
-      - name: Notify Slack
+
+      # 8. ChatOps (Notificación en Teams)
+      - name: Notify Teams
         uses: slackapi/slack-github-action@v1.23.0
         with:
           payload: |
