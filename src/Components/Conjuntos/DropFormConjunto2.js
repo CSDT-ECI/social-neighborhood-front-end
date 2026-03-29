@@ -27,7 +27,11 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
     });
 
     const [loading,setIsloading] =useState(false);
-    
+    const getStringDataLocation = useCallback(() => {
+        return currentUsuario?.tipoUsuario === 'Residente'
+            ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
+            : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
+    }, [currentUsuario, currentVivienda, currentConjunto]);
     const ayuda=(res,currentstr)=>{
         axios.all(res?.map(function(result){
             console.log(result)
