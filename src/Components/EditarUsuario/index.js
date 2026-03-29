@@ -1,35 +1,17 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import {Users as Usuarios} from '../../testData';
-import {Conjuntos } from '../../testData';
-import {unidadesVivienda} from '../../testData';
-import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@mui/material/Grid';
 import DropForm from '../Conjuntos/DropForm'
 import './register.css';
-import DropFormConjunto3 from '../Conjuntos/DropFormConjunto3';
-import DropFormConjunto2 from '../Conjuntos/DropFormConjunto2';
 const defaultState = {
     conjunto: "",
     unidad: ""
   };
 const EditarUsuario = ({user,conjunto}) => {
-
-    const [currentConjuntoData,SetCurrentConjuntoData] = useState({});
-    const toggleConjunto =(e)=>{
-        SetCurrentConjuntoData(e.target.value)
-        console.log(currentConjuntoData)
-    }
-
-    const [rows, setRows] = useState([defaultState]);
-    const handleOnAdd = () => {
-    setRows(rows.concat(defaultState));
-    };
 
     const handleSubmit = (event) => {
         event.preventDefault();

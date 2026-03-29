@@ -64,12 +64,19 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
                             //por ello se va crear un nuevo tipo de form llamado dropMetaForm.js
                             <div>
                             <br/>
-                            <DropFormConjunto2 param='TipoAgrupacionesPropia' 
-                                    location='admin' enableSubmit={false} 
-                                    currentConjunto ={conjunto} currentUsuario={user} 
-                                    location2='social' param3='tipoAgrupacionById' level={1} 
-                                    enableSubmit = {true} param2='newAgrupacion'submited={toggleUnidads}
-                                    />
+                            <DropFormConjunto2 
+                                param='TipoAgrupacionesPropia' 
+                                location='admin' 
+                                enableSubmit={false} 
+                                currentConjunto={conjunto} 
+                                currentUsuario={user} 
+                                location2='social' 
+                                param3='tipoAgrupacionById' 
+                                level={1} 
+                                enableSubmit={true}   // <- duplicada
+                                param2='newAgrupacion'
+                                submited={toggleUnidads}
+                            />
                             </div>
                         :
                         isUnidad?
