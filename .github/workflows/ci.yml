@@ -27,8 +27,10 @@ jobs:
 
       # 4. Build
       - name: Build project
-        export NODE_OPTIONS=--openssl-legacy-provider
         run: npm run build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+
 
       # 5. Unit Tests
       - name: Run unit tests
