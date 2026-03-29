@@ -16,6 +16,7 @@ import axios from 'axios';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import Swal from "sweetalert2";
+import { is } from 'date-fns/locale';
 
 const ZonasComunes = ({conjunto,user,currentVivienda}) => {
 
@@ -36,6 +37,8 @@ const getStringDataLocation =()=>{
     : str = conjunto.idconjunto+`/`+conjunto.idusuarioadministrador+`/`+conjunto.id
     return str;
 }
+const [isAgrupacion,setIsAgrupacion] = useState(false);
+
 const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,7 +56,7 @@ const handleSubmit = (event) => {
     let currentstr = getStringDataLocation();
     axios.post(window.$dir+`admin`+`/`+ `newzonaComunConjunto`+`/`+ currentstr, body)
     .then( function (response) {
-        console.log(response.status);
+        console.log(response.status + isAgrupacion);
         console.log(response.data);
         if (response.status === 200) {
         Swal.fire(

@@ -20,6 +20,8 @@ const DropFormConjunto3 = ({param,param2,param3,
         costoAdministracion:''
     });
 
+    const [loading,setIsloading] =useState(false);
+
 const toggleAgrupacion =(message)=>{
     const ans = message.idItem;
     console.log("datos agrupacion")
@@ -35,7 +37,7 @@ const toggleInmueble =(message)=>{
 }
 
 const toggleVivienda =(message)=>{
-    console.log("datos vivienda")
+    console.log("datos vivienda" + loading)
     console.log(message.currentTarget.value);
     handleOnChange("costoAdministracion",message.currentTarget.value)
 }
