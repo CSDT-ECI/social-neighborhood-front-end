@@ -10,12 +10,6 @@ import DropFormConjunto3 from '../Conjuntos/DropFormConjunto3';
 
 const ConfigurarConjuntos = ({user,conjunto}) => {
     
-    const [currentConjuntoData,SetCurrentConjuntoData] = useState({
-        idConjunto:'',
-        tipoAgrupacion: '',
-        tipoInmueble: ''
-        });
-
     const [isAgrupacion,setIsAgrupacion] = useState(false);
     const [isUnidad,setIsUnidad] = useState(false);
     const toggleAgrupacion =()=>{
@@ -83,8 +77,8 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
                             <DropFormConjunto3 param='TipoAgrupacionesPropia2' 
                                     location='admin' enableSubmit={false} 
                                     currentConjunto ={conjunto} currentUsuario={user} 
-                                    location2='social' param3='tipoAgrupacionById' 
-                                    enableSubmit = {false} param2='newAgrupacion' 
+                                    location2='social' param3='tipoAgrupacionById2' 
+                                    enableSubmit = {false} param2='newAgrupacion2' 
                                     />
                         </div>
                             :

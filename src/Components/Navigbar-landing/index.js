@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import {FaBars} from 'react-icons/fa';
 import {IconContext} from 'react-icons/lib';
 import {animateScroll as scroll } from 'react-scroll';
@@ -8,8 +8,6 @@ import {
     NavLogo,
     MobileIcon,
     NavMenu,
-    NavItems,
-    NavLinks,
     NavBtnWrapper,
     Button
 } from './NavigbarElements';

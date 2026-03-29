@@ -39,6 +39,7 @@ const AdminDashboard = () => {
                 return <ZonasComunes  user={currentUser} conjunto={currentConjunto}/>;
             case 'Exit':
                 history.push("/");
+                break;
             default:
               return <Feed user={currentUser} conjunto={currentConjunto}/>;
           }
@@ -66,7 +67,7 @@ const AdminDashboard = () => {
 
         }
         fetchUser();
-    },[]);
+    },[currentConjunto, currentUser, currentVivienda]);
     return (
         <div className="adminContainer">
             <div className="fondo"/>

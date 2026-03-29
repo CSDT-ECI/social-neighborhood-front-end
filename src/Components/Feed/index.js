@@ -107,13 +107,12 @@ const Feed = ({user,conjunto}) => {
         </Card>
         {rtData?.map(function (post) {
             console.log(post)
-            if(user.tipousuario ==='Residente' && post.rol!=="Administrador")
-            return(
-                <Post key={post.id} data={post} />)
-            if (user.tipousuario ==='Administrador' && post.rol!=="Administrador")
-            return(
-                <Post key={post.id} data={post} />)
-        })}   
+            if(user.tipousuario === 'Residente' && post.rol !== "Administrador")
+                return <Post key={post.id} data={post} />
+            if(user.tipousuario === 'Administrador' && post.rol !== "Administrador")
+                return <Post key={post.id} data={post} />
+            return null; // <- asegura que siempre se devuelve algo
+        })}
         </div>
     </div>
     )

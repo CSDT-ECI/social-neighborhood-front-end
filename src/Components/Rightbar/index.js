@@ -59,14 +59,15 @@ const Rightbar = () => {
                         
                     </IconButton>
                 </Grid>
-                {show?
-                 rtData?.map(function (post) {
-                    console.log(post)
-                    if(post.rol ==='Administrador'){
-                    return(
-                        <Post key={post.id} data={post} />)
-                    }
-                }):<div></div>
+                {show ?
+                    rtData?.map(function (post) {
+                        console.log(post)
+                        if (post.rol === 'Administrador') {
+                        return <Post key={post.id} data={post} />
+                        }
+                        return null; // <- asegura que siempre se devuelve algo
+                    })
+                    : <div></div>
                 }
                
             </p>

@@ -29,7 +29,7 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
     const [loading,setIsloading] =useState(false);
     const getStringDataLocation =()=>{
         let str =''
-        currentUsuario?.tipoUsuario == 'Residente' ? 
+        currentUsuario?.tipoUsuario === 'Residente' ? 
         str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
         : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
         return str;
@@ -69,7 +69,7 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
         }).catch(
             e =>{console.log("Error: :c "+e)}
         )
-    },[param])
+    },[param, ayuda, getStringDataLocation, level, location])
 
     
 useEffect(()=>{
@@ -78,7 +78,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     submited(current)
-},[current])
+},[current, submited])
 
 const handleOnChange = (name, value) => {
     setCurrent({
@@ -89,13 +89,11 @@ const handleOnChange = (name, value) => {
         event.preventDefault();
         setIsloading(true)
         let body ={}
-        let body2 ={}
-        if (param2 = "newAgrupacion")
+        if (param2 === "newAgrupacion")
             body={
                 idtipoagrupacionconjunto:current.idItem,
                 numero:current.nItem}
-        let currentstr = getStringDataLocation();
-        axios.post(window.$dir+location+`/`+ param2, body)
+        axios.post(`${window.$dir}${location}/${param2}`, body)
         .then( function (response) {
             console.log(response.status);
             console.log(response.data);

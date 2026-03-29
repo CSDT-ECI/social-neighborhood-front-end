@@ -36,7 +36,7 @@ const getStringDataLocation =()=>{
     : str = conjunto.idconjunto+`/`+conjunto.idusuarioadministrador+`/`+conjunto.id
     return str;
 }
-const [isAgrupacion,setIsAgrupacion] = useState(false);
+const [isAgrupacion] = useState(false);
 
 const handleSubmit = (event) => {
     event.preventDefault();

@@ -67,7 +67,7 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
       }).catch(
           e =>{console.log("Error: :c "+e)}
       )
-  },[])
+  },[conjunto?.idconjunto])
 
   useEffect(()=>{
   fetchData()
@@ -98,7 +98,7 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
                 user.tipousuario ==="Administrador"?
                 <p className="letras">Conjunto :{nConjunto}</p>
                 :
-                <p className="letras">Vivienda: {(vivienda.tipoagrupacion!='null'? vivienda.tipoagrupacion:'')+" "+(vivienda.numagrupacion!=='null'?vivienda.numagrupacion:'')+" "+
+                <p className="letras">Vivienda: {(vivienda.tipoagrupacion!=='null'? vivienda.tipoagrupacion:'')+" "+(vivienda.numagrupacion!=='null'?vivienda.numagrupacion:'')+" "+
                 vivienda.tipoinmueble+" "+vivienda.numinmueble}</p>
               }
           </div>

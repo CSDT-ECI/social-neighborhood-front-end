@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
 
-const defaultState = [];
 const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
     const [data,setData]= useState([])
     const fetchData = useCallback(async () => {
@@ -25,7 +24,7 @@ const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentCo
             }).catch(
                 e =>{console.log("Error: :c "+e)}
             )
-        },[param])
+        },[param, location, onChange])
     useEffect(()=>{
         fetchData()
     },[fetchData])

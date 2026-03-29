@@ -36,6 +36,7 @@ const ResidentDashboard = () => {
                 return <Feed user={currentUser} conjunto={currentVivienda} />;
             case 'Exit':
                 history.push("/");
+                break;
         default:
             return <Feed user={currentUser} conjunto={currentVivienda} />;
         }
@@ -61,7 +62,7 @@ const ResidentDashboard = () => {
 
         }
         fetchUser();
-    },[]);
+    },[currentConjunto, currentUser, currentVivienda]);
 
     return (
         <div className="residentContainer">

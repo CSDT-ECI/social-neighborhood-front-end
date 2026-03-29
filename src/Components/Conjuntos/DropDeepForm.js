@@ -12,18 +12,16 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
     const [datas,setDatas]= useState([])
 
     const fetchData = useCallback(async () => {
-            // get unidades de vivienda by Email
-            await axios.get(window.$dir+location+`/`+ param
-            ).then(res =>{  
-                const dataRes = res.data       
-                //por cada unidad de vivienda hacer
-                setDatas(dataRes)
-                    console.log(datas)  
-                    console.log(dataRes)
-            }).catch(
-                e =>{console.log("Error: No se encuentran unidades de vivienda para el Usuario "+e)}
-            )
-        },[param])
+        try {
+            const res = await axios.get(`${window.$dir}${location}/${param}`);
+            const dataRes = res.data;
+            setDatas(dataRes);
+            console.log(datas);
+            console.log(dataRes);
+        } catch (e) {
+            console.log("Error: No se encuentran unidades de vivienda para el Usuario " + e);
+        }
+    }, [param, location, datas]);
     useEffect(()=>{
         fetchData()
     },[fetchData])
@@ -33,7 +31,7 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
         const data = new FormData(event.currentTarget);
         // enviar datos al back
         let body ={}
-        if (param2 == "newTipoAgrupacion")
+        if (param2 === "newTipoAgrupacion")
             body={
                 idconjunto:currentConjunto,
                 tipoAgrupacionConjunto:data.id}

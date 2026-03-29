@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
@@ -43,7 +43,7 @@ const DropForm = ({param,param2,param3,stringStr,
             }).catch(
                 e =>{console.log("Error: :c "+e)}
             )
-        },[param])
+        },[param, location, onChange])
     useEffect(()=>{
         fetchData()
     },[fetchData])
@@ -97,7 +97,7 @@ const DropForm = ({param,param2,param3,stringStr,
                 {datas.length!==0?
                     <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
                         onChange={Togglesubmit2} >
-                            {param=='unidadesDeViviendaConjuto'?
+                            {param==='unidadesDeViviendaConjuto'?
                             datas?.map((element)=>{
                                     return (
                                         <MenuItem id={element.idunidaddevivienda} 
