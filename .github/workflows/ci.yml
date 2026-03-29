@@ -44,7 +44,7 @@ jobs:
             -Dsonar.projectKey=CSDT-ECI_social-neighborhood-front-end
             -Dsonar.organization=csdt-eci
             -Dsonar.host.url=https://sonarcloud.io/project?id=CSDT-ECI_social-neighborhood-front-end
-            -Dsonar.login=${{ secrets.SONAR_SECRET }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       # 7. Dependency Check (OWASP)
       - name: OWASP Dependency Check
