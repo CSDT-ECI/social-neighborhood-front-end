@@ -67,7 +67,6 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
                             <DropFormConjunto2 
                                 param='TipoAgrupacionesPropia' 
                                 location='admin' 
-                                enableSubmit={false} 
                                 currentConjunto={conjunto} 
                                 currentUsuario={user} 
                                 location2='social' 

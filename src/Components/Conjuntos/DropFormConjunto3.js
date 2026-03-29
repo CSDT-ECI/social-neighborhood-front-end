@@ -93,7 +93,7 @@ const handleOnChange = (name, value) => {
                                         />
                     <br/>
                     <DropFormConjunto2 param='TipoInmueblesPropia' 
-                        location='admin' enableSubmit={false} 
+                        location='admin' 
                         currentConjunto ={currentConjunto} currentUsuario={currentUsuario} 
                         location2='social' param3='tipoInmuebleById' level={1} 
                         enableSubmit = {false} param2='newAgrupacion' 
