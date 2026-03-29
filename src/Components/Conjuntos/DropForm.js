@@ -12,10 +12,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
 
-const defaultState = {
-    ans:''
-};
-
 const DropForm = ({param,param2,param3,stringStr,
                     location,location2,
                     onChange,enableSubmit,submited,isenable,
@@ -59,7 +55,6 @@ const DropForm = ({param,param2,param3,stringStr,
         Togglesubmit2(true)
         event.preventDefault();
         console.log(event.currentTarget)
-        const data = new FormData(event.currentTarget);
         // // enviar datos al back
         setIsloading(true)
         let body ={}

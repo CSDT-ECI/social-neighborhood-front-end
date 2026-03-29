@@ -35,7 +35,7 @@ const Login=()=>{
     const sendCache =(rol)=>{
         const body={}
         let url=''
-        if(rol =="Administrador")
+        if(rol ==="Administrador")
         url = window.$dir+`admin/autorizadoAdmin/`+currentConjuntoData.idconjunto+`/`+currentConjuntoData.idusuarioadministrador+`/`+currentConjuntoData.id
         else url =window.$dir+`client/autorizadoClient/`+currentViviendaData.idconjunto+`/`+currentUserData.id+`/`+currentViviendaData.idunidaddevivienda
         axios.post(url, body).then( function (response) {
@@ -77,7 +77,7 @@ const Login=()=>{
         e.preventDefault();
         let redirect =''
         localStorage.setItem('user', JSON.stringify(currentUserData));
-        currentUserData.tipousuario=="Administrador"?
+        currentUserData.tipousuario==="Administrador"?
         localStorage.setItem('conjunto', JSON.stringify(currentConjuntoData)):
         localStorage.setItem('vivienda', JSON.stringify(currentViviendaData))
         sendCache(currentUserData.tipousuario);

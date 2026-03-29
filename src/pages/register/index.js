@@ -13,7 +13,7 @@ const Register = () => {
                 <Grid container spacing={30}>
 
                     <Grid item xs={8}>
-                        <img src="./register.png" heigh="480px" width="480px">
+                        <img alt='' src="./register.png" heigh="480px" width="480px">
                             </img>
                     </Grid>
                     <Grid item xs={4}>

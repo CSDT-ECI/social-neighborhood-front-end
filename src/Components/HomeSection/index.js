@@ -1,7 +1,5 @@
-import React from 'react';
 import {
     HeroContainer,
-    HeroBg,
     HeroContent,
     HeroP,
     HeroH1,
@@ -13,7 +11,6 @@ import {
     HeroBtnWrapper
 } from './LoginElements';
 import './LoginFormElements.css';
-import people from './../../img/background.jpg';
 const HomeSection = () => {
     return (
         <HeroContainer id="home">   
@@ -31,7 +28,7 @@ const HomeSection = () => {
                         </HeroBtnWrapper>
                     </HColumn1>
                     <HColumn2>
-                        <img src="./BackgroundHERO.png" heigh="500px" width="500px">
+                        <img alt='' src="./BackgroundHERO.png" heigh="500px" width="500px">
                         </img>
                     </HColumn2>
                     </HeroRow>

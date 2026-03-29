@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import { useState} from "react";
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -51,7 +51,7 @@ const handleOnChange = (name, value) => {
         console.log(current)
         setIsloading(true)
         let body ={}
-        if (param2 = "newUnidadDeVivienda")
+        if (param2 === "newUnidadDeVivienda")
             body={
                 idAgrupacion:current.idagrupacion,
                 idTipoInmuebleConjunto:current.idTipoInmuebleConjunto,

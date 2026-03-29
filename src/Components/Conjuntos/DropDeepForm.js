@@ -8,17 +8,6 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
 
-const defaultState = {
-    id:'',
-    conjunto:'',
-    tipoAgrupacion:'',
-    numeroAgrupacion:'',
-    tipoInmueble:'',
-    numeroInmueble:'',
-    costoAdministracion:''
-};
-const defaultState0 = [];
-
 const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
     const [datas,setDatas]= useState([])
 
@@ -44,7 +33,7 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
         const data = new FormData(event.currentTarget);
         // enviar datos al back
         let body ={}
-        if (param2 = "newTipoAgrupacion")
+        if (param2 == "newTipoAgrupacion")
             body={
                 idconjunto:currentConjunto,
                 tipoAgrupacionConjunto:data.id}
@@ -79,7 +68,7 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
                                 <MenuItem id={uVivienda.idunidaddevivienda}
                                         key ={uVivienda.idunidaddevivienda}
                                         name={uVivienda.idunidaddevivienda} 
-                                        value={uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!=='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!='null'?uVivienda.numagrupacion:'')+" "+
+                                        value={uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!=='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!=='null'?uVivienda.numagrupacion:'')+" "+
                                         uVivienda.tipoinmueble+" "+uVivienda.numinmueble
                                                 }
                                         onClick= {(e)=> onChange(uVivienda)}

@@ -16,7 +16,6 @@ import axios from 'axios';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import Swal from "sweetalert2";
-import { is } from 'date-fns/locale';
 
 const ZonasComunes = ({conjunto,user,currentVivienda}) => {
 
@@ -32,7 +31,7 @@ const handleOnChange = (value) => {
   };
 const getStringDataLocation =()=>{
     let str =''
-    user?.tipoUsuario == 'Residente' ? 
+    user?.tipoUsuario === 'Residente' ? 
     str = currentVivienda.idconjunto+`/`+user.id+`/`+currentVivienda.idunidaddevivienda
     : str = conjunto.idconjunto+`/`+conjunto.idusuarioadministrador+`/`+conjunto.id
     return str;
@@ -54,7 +53,7 @@ const handleSubmit = (event) => {
     console.log(data);
     console.log(body);
     let currentstr = getStringDataLocation();
-    axios.post(window.$dir+`admin`+`/`+ `newzonaComunConjunto`+`/`+ currentstr, body)
+    axios.post(`${window.$dir}admin/newzonaComunConjunto/${currentstr}`, body)
     .then( function (response) {
         console.log(response.status + isAgrupacion);
         console.log(response.data);
@@ -73,44 +72,8 @@ const handleSubmit = (event) => {
         Swal.fire("Esta zona comun ya existe! :(!", "intenta con otra  zona de tu conjunto", "error");
     });
 };
-    const [currentConjuntoData,SetCurrentConjuntoData] = useState({
-        idConjunto:'',
-        tipoAgrupacion: '',
-        tipoInmueble: ''
-        });
 
-    const [isNext,setNext] = useState(false);
-
-
-    const [isUnidad,setIsUnidad] = useState(false);
-    const toggleAgrupacion =()=>{
-        setIsAgrupacion(true);
-        setIsUnidad(false);
-        }
-
-    const toggleUnidad =()=>{
-        setIsAgrupacion(false);
-        setIsUnidad(true);
-        }
-    const handleChange = data => {
-        const { name, value } = data;
-        SetCurrentConjuntoData({
-            ...currentConjuntoData,
-            [name]: value
-        });
-        console.log(currentConjuntoData)
-    };
     
-        const [nValues,setNvalues]= useState({
-            nVivienda:'',
-            nAgrupacion:''
-        });
-        const onChange = (name,value) => {
-            setNvalues(
-                {...nValues,
-                    [name]:value
-                });
-            };
     return (
         <Box sx={{  flexGrow: 1,mx:0 }} className="card">
         <Typography variant="h4" align="center" component="h1" gutterBottom>Zonas Comunes</Typography>

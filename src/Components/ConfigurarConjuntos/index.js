@@ -1,25 +1,20 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import DropFormConjunto2 from '../Conjuntos/DropFormConjunto2';
 import DropFormConjunto3 from '../Conjuntos/DropFormConjunto3';
 
 const ConfigurarConjuntos = ({user,conjunto}) => {
-    const [currentInmueble,setCurrentInmueble] = useState('');
     
     const [currentConjuntoData,SetCurrentConjuntoData] = useState({
         idConjunto:'',
         tipoAgrupacion: '',
         tipoInmueble: ''
         });
-
-    const [isNext,setNext] = useState(false);
-
 
     const [isAgrupacion,setIsAgrupacion] = useState(false);
     const [isUnidad,setIsUnidad] = useState(false);
@@ -34,20 +29,6 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
         setIsUnidad(true);
         }
     const toggleUnidads =()=>{}
-    
-    const handleChange = data => {
-        const { name, value } = data;
-        SetCurrentConjuntoData({
-            ...currentConjuntoData,
-            [name]: value
-        });
-        console.log(currentConjuntoData)
-    };
-    
-    const [nValues,setNvalues]= useState({
-        nVivienda:'',
-        nAgrupacion:''
-    });
     
     return (
         <Box sx={{  flexGrow: 1,mx:0}} className="card">
@@ -99,7 +80,7 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
                         :
                         isUnidad?
                         <div>
-                            <DropFormConjunto3 param='TipoAgrupacionesPropia' 
+                            <DropFormConjunto3 param='TipoAgrupacionesPropia2' 
                                     location='admin' enableSubmit={false} 
                                     currentConjunto ={conjunto} currentUsuario={user} 
                                     location2='social' param3='tipoAgrupacionById' 

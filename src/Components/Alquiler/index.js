@@ -11,8 +11,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Swal from "sweetalert2";
 import DialogTitle from '@mui/material/DialogTitle';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import DialogActions from '@mui/material/DialogActions';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 
@@ -20,8 +18,6 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const Alquiler = ({conjunto,user,vivienda,isEnabled,handleClose}) => {
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,14 +32,7 @@ const handleSubmit = (event) => {
         cancelado:false
     }
     console.log(body)
-    let url = window.$dir+`client`+`/`+ 'newAlquiler/'+
-    body.iniciodealquiler+`/`+
-    body.findealquiler+`/`+
-    body.idZonaComun+`/`+
-    conjunto.idconjunto+`/`+
-    user.id+`/`+
-    body.idunidaddeviviendausuario+`/`+
-    body.costo
+    let url = `${window.$dir}client/newAlquiler/${body.iniciodealquiler}/${body.findealquiler}/${body.idZonaComun}/${conjunto.idconjunto}/${user.id}/${body.idunidaddeviviendausuario}/${body.costo}`;
     console.log(url);
     axios.post(url)
     .then( function (response) {
@@ -114,6 +103,7 @@ const handleOnChange = (name, value) => {
                 <Grid item xs={6}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/pool.png" 
                                 heigh="270px" width="270px"
                             />
@@ -149,7 +139,7 @@ const handleOnChange = (name, value) => {
                     </Grid>
                     <br/>
                     {current.iniciodealquiler!=='' && value2?
-                         <DropForm param={'HorasFinAlquiler'+'/'+value2+'/'+current.iniciodealquiler+'/'+current.idZonaComun}
+                        <DropForm param={`HorasFinAlquiler/${value2}/${current.iniciodealquiler}/${current.idZonaComun}`} 
                          currentConjunto ={conjunto} currentUsuario={user} 
                          location='client' enableSubmit={false} 
                          submited={toggleFinAlquiler} isenable={true}
