@@ -84,7 +84,7 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
                                     location='admin' enableSubmit={false} 
                                     currentConjunto ={conjunto} currentUsuario={user} 
                                     location2='social' param3='tipoAgrupacionById2' 
-                                    enableSubmit = {false} param2='newAgrupacion2' 
+                                    param2='newAgrupacion2' 
                                     />
                         </div>
                             :

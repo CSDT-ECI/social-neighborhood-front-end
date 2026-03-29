@@ -22,14 +22,11 @@ const DropForm = ({param,param2,param3,stringStr,
     const [loading,setIsloading] =useState(false);
     const [enablesubmit2,sertenablesubmit2] =useState(false);
 
-    const getStringDataLocation =()=>{
-        let str =''
-
-        currentUsuario?.tipoUsuario === 'Residente' ? 
-        str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
-        : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
-        return str;
-    }
+    const getStringDataLocation = useCallback(() => {
+        return currentUsuario?.tipoUsuario === 'Residente'
+            ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
+            : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
+    }, [currentUsuario, currentVivienda, currentConjunto]);
     const Togglesubmit2 =()=>{
         sertenablesubmit2(true)
     }
