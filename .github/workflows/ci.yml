@@ -41,9 +41,4 @@ jobs:
 
       # 8. ChatOps (Notificación en Teams)
       - name: Notify Teams
-        uses: skitionek/notify-microsoft-teams@v1
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        with:
-          title: "CI Pipeline"
-          text: "✅ Pipeline completado en *${{ github.repository }}* para commit *${{ github.sha }}*"
+        run: | curl -X POST "" \ -H "Content-Type: application/json" \ -d '{ "title": "CI Pipeline", "text": "✅ Pipeline completado en *${{ github.repository }}* para commit *${{ github.sha }}*" }'
