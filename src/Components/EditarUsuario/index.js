@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
-import DropForm from '../Conjunt
-
+import DropForm from '../Conjuntos/DropForm'
+import './register.css';
 const EditarUsuario = ({user,conjunto}) => {
 
     const handleSubmit = (event) => {
