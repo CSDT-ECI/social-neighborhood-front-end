@@ -71,6 +71,3 @@ jobs:
               "title": "✅ Pipeline completado",
               "text": "Pipeline completado en *${{ github.repository }}* para commit *${{ github.sha }}*"
             }'
-
-
-            {"poster":"Flow bot","location":"Channel","body/recipient/groupId":"fd3eb98d-3965-46a4-adfb-ba05b24d15de","body/recipient/channelId":"19:EIdnkp1nf5uMVSlJsZKF7yVUnoN6vH7X2Iy0XE6cQP41@thread.tacv2","body/messageBody":"{ \"type\": \"AdaptiveCard\", \"version\": \"1.2\", \"body\": [ { \"type\": \"TextBlock\", \"text\": \"\", \"weight\": \"Bolder\", \"size\": \"Medium\" }, { \"type\": \"TextBlock\", \"text\": \"\", \"wrap\": true } ] }"}
