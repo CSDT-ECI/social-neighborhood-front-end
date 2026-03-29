@@ -68,7 +68,3 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-
-      # 9. Extra: AI Code Review (ejemplo con CodiumAI)
-      - name: AI Code Review
-        run: npx codiumai review
