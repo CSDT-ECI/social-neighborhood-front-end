@@ -41,4 +41,14 @@ jobs:
 
       # 8. ChatOps (Notificación en Teams)
       - name: Notify Teams
-        run: | curl -X POST "" \ -H "Content-Type: application/json" \ -d '{ "title": "CI Pipeline", "text": "✅ Pipeline completado en *${{ github.repository }}* para commit *${{ github.sha }}*" }'
+        run: |
+          curl -X POST "${{ secrets.TEAMS_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "@type": "MessageCard",
+              "@context": "http://schema.org/extensions",
+              "summary": "CI Pipeline",
+              "themeColor": "0076D7",
+              "title": "✅ Pipeline completado",
+              "text": "Pipeline completado en *${{ github.repository }}* para commit *${{ github.sha }}*"
+            }'
