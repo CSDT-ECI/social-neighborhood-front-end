@@ -18,3 +18,4 @@
 9. [Prácticas XP y Backlog de Acciones](./docs/practicas_xp_backlog.md)
 10. [Testing Debt](./docs/deuda_tecnica.md)
 11. [Análisis de Calidad y Herramientas Automatizadas](./CSDT_PrimeraEntrega.md)
+12. [Evaluación de DevEx y Productividad](./docs/devex_space_analysis.md)
