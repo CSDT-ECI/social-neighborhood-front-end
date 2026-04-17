@@ -1,14 +1,11 @@
-import React,{useState} from 'react'
-import MenuItem from '@mui/material/MenuItem';
+import {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
-import SaveTwoToneIcon from '@mui/icons-material/SaveTwoTone';
 import DropForm from '../Conjuntos/DropForm';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -20,11 +17,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import Swal from "sweetalert2";
 
-
-const defaultState = {
-        tipoAgrupacion: {},
-        tipoInmueble: {}
-    }
 const ZonasComunes = ({conjunto,user,currentVivienda}) => {
 
 const [current,setCurrent] = useState({
@@ -39,11 +31,13 @@ const handleOnChange = (value) => {
   };
 const getStringDataLocation =()=>{
     let str =''
-    user?.tipoUsuario == 'Residente' ? 
+    user?.tipoUsuario === 'Residente' ? 
     str = currentVivienda.idconjunto+`/`+user.id+`/`+currentVivienda.idunidaddevivienda
     : str = conjunto.idconjunto+`/`+conjunto.idusuarioadministrador+`/`+conjunto.id
     return str;
 }
+const [isAgrupacion] = useState(false);
+
 const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -59,9 +53,9 @@ const handleSubmit = (event) => {
     console.log(data);
     console.log(body);
     let currentstr = getStringDataLocation();
-    axios.post(window.$dir+`admin`+`/`+ `newzonaComunConjunto`+`/`+ currentstr, body)
+    axios.post(`${window.$dir}admin/newzonaComunConjunto/${currentstr}`, body)
     .then( function (response) {
-        console.log(response.status);
+        console.log(response.status + isAgrupacion);
         console.log(response.data);
         if (response.status === 200) {
         Swal.fire(
@@ -78,72 +72,8 @@ const handleSubmit = (event) => {
         Swal.fire("Esta zona comun ya existe! :(!", "intenta con otra  zona de tu conjunto", "error");
     });
 };
-    const [currentConjuntoData,SetCurrentConjuntoData] = useState({
-        idConjunto:'',
-        tipoAgrupacion: '',
-        tipoInmueble: ''
-        });
-    const [isEnableButtons,setEnableButtons] = useState(false);
 
-    const [isNext,setNext] = useState(false);
-
-
-    const [isAgrupacion,setIsAgrupacion] = useState(false);
-    const [isUnidad,setIsUnidad] = useState(false);
-    const toggleAgrupacion =()=>{
-        setIsAgrupacion(true);
-        setIsUnidad(false);
-        }
-    const toggleNext =()=>{
-            if(!isNext && !isUnidad){
-            setNext(true);
-            toggleUnidad();
-            }else{
-            setNext(false);
-            setIsAgrupacion(false);
-            setIsUnidad(false);
-            }
-        }
-    const toggleUnidad =()=>{
-        setIsAgrupacion(false);
-        setIsUnidad(true);
-        }
-    const handleChange = data => {
-        const { name, value } = data;
-        SetCurrentConjuntoData({
-            ...currentConjuntoData,
-            [name]: value
-        });
-        console.log(currentConjuntoData)
-    };
-    const handleButtons =(e)=>{
-        handleChange(e.target.id);
-        setEnableButtons(true);
-        axios.get(`https://socialneighborhood.herokuapp.com/admin/`+currentConjuntoData.idConjunto+`/tipoAgrupacion`
-            ).then(res =>{     
-                handleChange(res.data);
-                toggleAgrupacion();
-            }).catch(
-                e =>{console.log("No se encuentra tipo agrupacion: "+e)}
-            )
-        axios.get(`https://socialneighborhood.herokuapp.com/admin/`+currentConjuntoData.idConjunto+`/tipoInmueble`
-        ).then(res =>{   
-            handleChange(res.data);
-            toggleUnidad();
-        }).catch(
-            e =>{console.log("No se encuentra tipo inmueble: "+e)}
-        )
-    }
-        const [nValues,setNvalues]= useState({
-            nVivienda:'',
-            nAgrupacion:''
-        });
-        const onChange = (name,value) => {
-            setNvalues(
-                {...nValues,
-                    [name]:value
-                });
-            };
+    
     return (
         <Box sx={{  flexGrow: 1,mx:0 }} className="card">
         <Typography variant="h4" align="center" component="h1" gutterBottom>Zonas Comunes</Typography>
@@ -156,6 +86,7 @@ const handleSubmit = (event) => {
                 <Grid item xs={4}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/sport1.png" 
                                 heigh="270px" width="270px"
                             />
@@ -164,6 +95,7 @@ const handleSubmit = (event) => {
                 <Grid item xs={4}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/sport2.png" 
                                 heigh="270px" width="270px"
                             />
@@ -172,6 +104,7 @@ const handleSubmit = (event) => {
                 <Grid item xs={4}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/sport3.png" 
                                 heigh="270px" width="270px"
                             />

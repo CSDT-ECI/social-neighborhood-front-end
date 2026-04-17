@@ -1,21 +1,17 @@
 import Leftbar from '../../Components/Leftbar';
 import Feed from '../../Components/Feed';
 import Rightbar from '../../Components/Rightbar';
-import Home from '../home'
-import {useParams} from 'react-router';
-import React,{useState,useEffect} from 'react'
-import { Users } from "../../testData";
+import {useState,useEffect} from 'react'
 import Swal from "sweetalert2";
 import './resident.css';
 import Alquiler from '../../Components/Alquiler';
-import { Panorama } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 const ResidentDashboard = () => {
     let history = useHistory();
-    const [currentUser,setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
-    const [currentConjunto,setCurrentConjunto] = useState(JSON.parse(localStorage.getItem('conjunto')));
-    const [currentVivienda,setCurrentVivienda] = useState(JSON.parse(localStorage.getItem('vivienda')));
+    const [currentUser] = useState(JSON.parse(localStorage.getItem('user')));
+    const [currentConjunto] = useState(JSON.parse(localStorage.getItem('conjunto')));
+    const [currentVivienda] = useState(JSON.parse(localStorage.getItem('vivienda')));
 
     const [section, setSection] = useState('Feed');
     const changeSection = some => () =>{
@@ -25,7 +21,7 @@ const ResidentDashboard = () => {
      }
 
      const [open, setOpen] = useState(false);
-     const [right, setRight] = useState([]);
+     const [right] = useState([]);
 
      const handleClickOpen = () => {
        setOpen(true);
@@ -34,16 +30,13 @@ const ResidentDashboard = () => {
      const handleClose = () => {
        setOpen(false);
      };
-     const sendRight = data => () => {
-         console.log(data)
-        setRight(data);
-      };
      const switchSection = (param) =>{
         switch(param) {
             case 'Feed':
                 return <Feed user={currentUser} conjunto={currentVivienda} />;
             case 'Exit':
                 history.push("/");
+                break;
         default:
             return <Feed user={currentUser} conjunto={currentVivienda} />;
         }
@@ -69,7 +62,7 @@ const ResidentDashboard = () => {
 
         }
         fetchUser();
-    },[]);
+    },[currentConjunto, currentUser, currentVivienda]);
 
     return (
         <div className="residentContainer">

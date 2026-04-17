@@ -1,13 +1,10 @@
-import React from 'react';
 import Post from '../Post';
-import {db,storage} from './../../firebase/firebaseConfig';
-import { useContext, useEffect, useState } from "react";
+import {db} from './../../firebase/firebaseConfig';
+import { useEffect, useState } from "react";
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 
 import { indigo } from '@mui/material/colors';
 
@@ -28,7 +25,7 @@ const Rightbar = () => {
                 })
             });
             posts?.forEach((post)=>{
-                if(post.rol =='Administrador'){
+                if(post.rol ==='Administrador'){
                 cuenta++
                 }
             })
@@ -41,9 +38,6 @@ const Rightbar = () => {
     useEffect(()=>{
         loadDataRT()
     },[])
-    const showPost =()=>{
-        setCount(count);
-    }
     return (
         <div className="drawerRight">
             <p className="letrasright">
@@ -65,14 +59,15 @@ const Rightbar = () => {
                         
                     </IconButton>
                 </Grid>
-                {show?
-                 rtData?.map(function (post) {
-                    console.log(post)
-                    if(post.rol =='Administrador'){
-                    return(
-                        <Post key={post.id} data={post} />)
-                    }
-                }):<div></div>
+                {show ?
+                    rtData?.map(function (post) {
+                        console.log(post)
+                        if (post.rol === 'Administrador') {
+                        return <Post key={post.id} data={post} />
+                        }
+                        return null; // <- asegura que siempre se devuelve algo
+                    })
+                    : <div></div>
                 }
                
             </p>

@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-
+import { useState} from "react";
 import axios from 'axios';
-import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import DropFormConjunto2 from '../Conjuntos/DropFormConjunto2';
@@ -23,18 +21,6 @@ const DropFormConjunto3 = ({param,param2,param3,
     });
 
     const [loading,setIsloading] =useState(false);
-    const [enablesubmit2,sertenablesubmit2] =useState(false);
-        const daticos =[]
-    const getStringDataLocation =()=>{
-        let str =''
-        currentUsuario?.tipoUsuario == 'Residente' ? 
-        str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
-        : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
-        return str;
-    }
-    const Togglesubmit2 =()=>{
-        sertenablesubmit2(true)
-    }
 
 const toggleAgrupacion =(message)=>{
     const ans = message.idItem;
@@ -51,7 +37,7 @@ const toggleInmueble =(message)=>{
 }
 
 const toggleVivienda =(message)=>{
-    console.log("datos vivienda")
+    console.log("datos vivienda" + loading)
     console.log(message.currentTarget.value);
     handleOnChange("costoAdministracion",message.currentTarget.value)
 }
@@ -65,7 +51,7 @@ const handleOnChange = (name, value) => {
         console.log(current)
         setIsloading(true)
         let body ={}
-        if (param2 = "newUnidadDeVivienda")
+        if (param2 === "newUnidadDeVivienda")
             body={
                 idAgrupacion:current.idagrupacion,
                 idTipoInmuebleConjunto:current.idTipoInmuebleConjunto,
@@ -107,7 +93,7 @@ const handleOnChange = (name, value) => {
                                         />
                     <br/>
                     <DropFormConjunto2 param='TipoInmueblesPropia' 
-                        location='admin' enableSubmit={false} 
+                        location='admin' 
                         currentConjunto ={currentConjunto} currentUsuario={currentUsuario} 
                         location2='social' param3='tipoInmuebleById' level={1} 
                         enableSubmit = {false} param2='newAgrupacion' 

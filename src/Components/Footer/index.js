@@ -7,9 +7,7 @@ import {
     SocialMediaWrap,
     WebSiteRight,
     SocialLogo,
-    NavLinks,
-    NavItems,
-    NavbarContainer
+    NavLinks
 
 } from './FooterElements';
 const Footer = () => {

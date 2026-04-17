@@ -8,58 +8,20 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
 
-const defaultState = {
-    id:'',
-    conjunto:'',
-    tipoAgrupacion:'',
-    numeroAgrupacion:'',
-    tipoInmueble:'',
-    numeroInmueble:'',
-    costoAdministracion:''
-};
-const defaultState0 = [];
-const defaultState3 = {};
-const defaultState2 = {
-    id:'',
-    idAgrupacion:'',
-    idTipoInmuebleConjunto:'',
-    numInmueble:'',
-    costoAdministracion:''
-};
 const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
-    const [data,setData]= useState(defaultState0)
     const [datas,setDatas]= useState([])
-    const [viviendas,setViviendas]= useState([defaultState])
-    const vivienda ={
-        id:'',
-        conjunto:'',
-        tipoAgrupacion:'',
-        numeroAgrupacion:'',
-        tipoInmueble:'',
-        numeroInmueble:'',
-        costoAdministracion:''
-    }
-    const handleOnChange = (index, name, value) => {
-        const copyRows = [...viviendas];
-        copyRows[index] = {
-          ...copyRows[index],
-          [name]: value
-        };
-        setDatas(copyRows);
-      };
+
     const fetchData = useCallback(async () => {
-            // get unidades de vivienda by Email
-            await axios.get(window.$dir+location+`/`+ param
-            ).then(res =>{  
-                const dataRes = res.data       
-                //por cada unidad de vivienda hacer
-                setDatas(dataRes)
-                    console.log(datas)  
-                    console.log(dataRes)
-            }).catch(
-                e =>{console.log("Error: No se encuentran unidades de vivienda para el Usuario "+e)}
-            )
-        },[param])
+        try {
+            const res = await axios.get(`${window.$dir}${location}/${param}`);
+            const dataRes = res.data;
+            setDatas(dataRes);
+            console.log(datas);
+            console.log(dataRes);
+        } catch (e) {
+            console.log("Error: No se encuentran unidades de vivienda para el Usuario " + e);
+        }
+    }, [param, location, datas]);
     useEffect(()=>{
         fetchData()
     },[fetchData])
@@ -69,7 +31,7 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
         const data = new FormData(event.currentTarget);
         // enviar datos al back
         let body ={}
-        if (param2 = "newTipoAgrupacion")
+        if (param2 === "newTipoAgrupacion")
             body={
                 idconjunto:currentConjunto,
                 tipoAgrupacionConjunto:data.id}
@@ -104,12 +66,12 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
                                 <MenuItem id={uVivienda.idunidaddevivienda}
                                         key ={uVivienda.idunidaddevivienda}
                                         name={uVivienda.idunidaddevivienda} 
-                                        value={uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!='null'?uVivienda.numagrupacion:'')+" "+
+                                        value={uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!=='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!=='null'?uVivienda.numagrupacion:'')+" "+
                                         uVivienda.tipoinmueble+" "+uVivienda.numinmueble
                                                 }
                                         onClick= {(e)=> onChange(uVivienda)}
                                         >
-                                    {uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!='null'?uVivienda.numagrupacion:'')+" "+
+                                    {uVivienda.nombreconjunto+": "+(uVivienda.tipoagrupacion!=='null'? uVivienda.tipoagrupacion:'')+" "+(uVivienda.numagrupacion!=='null'?uVivienda.numagrupacion:'')+" "+
                                                 uVivienda.tipoinmueble+" "+uVivienda.numinmueble}
                                 </MenuItem>        
                             )                 

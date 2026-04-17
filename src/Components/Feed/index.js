@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Post from "../Post";
 import "./feed.css";
 import Card from '@mui/material/Card';
@@ -12,14 +12,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import {db,storage} from './../../firebase/firebaseConfig';
-import {useForm} from 'react-hook-form';
 import {useDate} from '../../useDate'
 import Swal from "sweetalert2";
-import CircularProgress from '@mui/material/CircularProgress';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 const Feed = ({user,conjunto}) => {
-    const {register, handleSubmit}  = useForm();
     const [rtData, setRTData] =  useState([])
     const [loading, isLoading] =  useState(false)
 
@@ -41,12 +38,7 @@ const Feed = ({user,conjunto}) => {
         loadDataRT()
     },[])
 
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-    const { date, time, wish } = useDate();
+    const { date, time } = useDate();
     const [fileUrl,setFileUrl] = useState(null)
     const onSubmit = (e) => {
         e.preventDefault();
@@ -115,13 +107,12 @@ const Feed = ({user,conjunto}) => {
         </Card>
         {rtData?.map(function (post) {
             console.log(post)
-            if(user.tipousuario =='Residente' && post.rol!="Administrador")
-            return(
-                <Post key={post.id} data={post} />)
-            if (user.tipousuario =='Administrador' && post.rol!="Administrador")
-            return(
-                <Post key={post.id} data={post} />)
-        })}   
+            if(user.tipousuario === 'Residente' && post.rol !== "Administrador")
+                return <Post key={post.id} data={post} />
+            if(user.tipousuario === 'Administrador' && post.rol !== "Administrador")
+                return <Post key={post.id} data={post} />
+            return null; // <- asegura que siempre se devuelve algo
+        })}
         </div>
     </div>
     )

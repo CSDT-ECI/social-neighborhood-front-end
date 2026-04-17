@@ -1,5 +1,5 @@
 import "./leftbar.css";
-import React,{useState,useEffect,useCallback} from 'react'
+import {useState,useEffect,useCallback} from 'react'
 import Avatar from '@mui/material/Avatar';
 
 import Divider from '@material-ui/core/Divider';
@@ -20,11 +20,6 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Exit from '@mui/icons-material/ExitToApp';
 import axios from 'axios';
-
-import {
-  Bookmark
-} from "@material-ui/icons";
-import { ThemeContext } from "styled-components";
 
 const drawerWidth = 240;
 
@@ -65,15 +60,14 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
   const [nConjunto, setnConjunto] = useState([]);
 
     const fetchData = useCallback(async () => {
-      await axios.get(window.$dir+`social/conjuntoById/`+ conjunto?.idconjunto
-      ).then(res =>{  
+    await axios.get(`${window.$dir}social/conjuntoById/${conjunto?.idconjunto}`).then(res =>{  
           const res2 = res.data 
           console.log(res2)       
           setnConjunto(res2.nombre)
       }).catch(
           e =>{console.log("Error: :c "+e)}
       )
-  },[])
+  },[conjunto?.idconjunto])
 
   useEffect(()=>{
   fetchData()
@@ -83,17 +77,7 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
   const handleClick = () => {
     setOpen(!open);
   };
-  const onHandleId = (id) => {
-    axios.get(window.$dir+`social/conjuntoById/`+ id
-        ).then(res =>{  
-            const res2 = res.data 
-            console.log(res2)       
-            return res2.nombre
-        }).catch(
-            e =>{console.log("Error: :c "+e)}
-    )
-  };
-  
+
   return (
     <div className="drawer" >
       <div className={styles.toolbar} />
@@ -111,16 +95,16 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
               <p className="letras">{user.tipousuario}</p>
               {/* <p className="profileInfoDesc">Conjunto: {conjunto.nombre}</p> */}
               {
-                user.tipousuario =="Administrador"?
+                user.tipousuario ==="Administrador"?
                 <p className="letras">Conjunto :{nConjunto}</p>
                 :
-                <p className="letras">Vivienda: {(vivienda.tipoagrupacion!='null'? vivienda.tipoagrupacion:'')+" "+(vivienda.numagrupacion!='null'?vivienda.numagrupacion:'')+" "+
+                <p className="letras">Vivienda: {(vivienda.tipoagrupacion!=='null'? vivienda.tipoagrupacion:'')+" "+(vivienda.numagrupacion!=='null'?vivienda.numagrupacion:'')+" "+
                 vivienda.tipoinmueble+" "+vivienda.numinmueble}</p>
               }
           </div>
           <Divider />
           <List className="letras">
-            {user.tipousuario=="Administrador"?
+            {user.tipousuario==="Administrador"?
               <div>
                 <ListItemButton name="Configuracion" className="Configuracion" onClick={handleClick}>
                   <ListItemIcon><SettingsIcon className="sidebarIcon letras"/> </ListItemIcon>

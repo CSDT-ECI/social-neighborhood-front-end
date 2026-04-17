@@ -1,45 +1,24 @@
-import React,{Fragment,useState} from 'react'
+import React,{useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
-import SaveTwoToneIcon from '@mui/icons-material/SaveTwoTone';
 import DropForm from '../Conjuntos/DropForm';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import axios from 'axios';
-import InputAdornment from '@mui/material/InputAdornment';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Swal from "sweetalert2";
 import DialogTitle from '@mui/material/DialogTitle';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import DialogActions from '@mui/material/DialogActions';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import DateFnsUtils from '@date-io/date-fns';
-import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const Alquiler = ({conjunto,user,vivienda,isEnabled,handleClose}) => {
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-const getStringDataLocation =()=>{
-    let str =''
-    user?.tipoUsuario == 'Residente' ? 
-    str = vivienda.idconjunto+`/`+user.id+`/`+vivienda.idunidaddevivienda
-    : str = conjunto.idconjunto+`/`+conjunto.idusuarioadministrador+`/`+conjunto.id
-    return str;
-}
 const handleSubmit = (event) => {
     event.preventDefault();
     handleClose()
@@ -53,14 +32,7 @@ const handleSubmit = (event) => {
         cancelado:false
     }
     console.log(body)
-    let url = window.$dir+`client`+`/`+ 'newAlquiler/'+
-    body.iniciodealquiler+`/`+
-    body.findealquiler+`/`+
-    body.idZonaComun+`/`+
-    conjunto.idconjunto+`/`+
-    user.id+`/`+
-    body.idunidaddeviviendausuario+`/`+
-    body.costo
+    let url = `${window.$dir}client/newAlquiler/${body.iniciodealquiler}/${body.findealquiler}/${body.idZonaComun}/${conjunto.idconjunto}/${user.id}/${body.idunidaddeviviendausuario}/${body.costo}`;
     console.log(url);
     axios.post(url)
     .then( function (response) {
@@ -131,6 +103,7 @@ const handleOnChange = (name, value) => {
                 <Grid item xs={6}>
                     <Paper >  
                             <img
+                                alt=''
                                 src="/pool.png" 
                                 heigh="270px" width="270px"
                             />
@@ -165,8 +138,8 @@ const handleOnChange = (name, value) => {
                         </Grid>
                     </Grid>
                     <br/>
-                    {current.iniciodealquiler!='' && value2?
-                         <DropForm param={'HorasFinAlquiler'+'/'+value2+'/'+current.iniciodealquiler+'/'+current.idZonaComun}
+                    {current.iniciodealquiler!=='' && value2?
+                        <DropForm param={`HorasFinAlquiler/${value2}/${current.iniciodealquiler}/${current.idZonaComun}`} 
                          currentConjunto ={conjunto} currentUsuario={user} 
                          location='client' enableSubmit={false} 
                          submited={toggleFinAlquiler} isenable={true}

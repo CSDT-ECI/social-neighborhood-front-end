@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import axios from 'axios';
-import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
 
-const defaultState = [];
 const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
     const [data,setData]= useState([])
     const fetchData = useCallback(async () => {
@@ -26,7 +24,7 @@ const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentCo
             }).catch(
                 e =>{console.log("Error: :c "+e)}
             )
-        },[param])
+        },[param, location, onChange])
     useEffect(()=>{
         fetchData()
     },[fetchData])
@@ -36,7 +34,7 @@ const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentCo
         const data = new FormData(event.currentTarget);
         // enviar datos al back
         let body ={}
-        if (param2 = "newTipoAgrupacion")
+        if (param2 === "newTipoAgrupacion")
             body={
                 idconjunto:currentConjunto,
                 tipoAgrupacionConjunto:data.id}

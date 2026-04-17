@@ -1,0 +1,73 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main", "Deuda_Tecnica_Procesos" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configuración de entorno (ejemplo con Node.js)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. Instalación de dependencias
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      # 4. Build
+      - name: Build project
+        run: npm run build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+
+
+      # 5. Unit Tests
+      - name: Run unit tests
+        run: npm test -- --coverage
+
+      # 6. Code Analysis con SonarCloud
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=CSDT-ECI_social-neighborhood-front-end
+            -Dsonar.organization=csdt-eci
+            -Dsonar.host.url=https://sonarcloud.io
+          projectBaseDir: .
+
+      # 7. Dependency Check (OWASP)
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: "Proyecto CI"
+          scan: "./"
+          format: "HTML"
+          out: "dependency-check-report"
+
+
+      # 8. ChatOps (Notificación en Teams)
+      - name: Notify Teams
+        run: |
+          curl -X POST "${{ secrets.TEAMS_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "@type": "MessageCard",
+              "@context": "http://schema.org/extensions",
+              "summary": "CI Pipeline",
+              "themeColor": "0076D7",
+              "title": "✅ Pipeline completado",
+              "text": "Pipeline completado en *${{ github.repository }}* para commit *${{ github.sha }}*"
+            }'

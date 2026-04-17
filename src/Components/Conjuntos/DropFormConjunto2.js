@@ -11,8 +11,6 @@ import SendIcon from '@mui/icons-material/Send';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
-import { getRadioUtilityClass } from "@mui/material";
-import { getTypeByValue } from "@mui/utils/integerPropType";
 
 const DropFormConjunto2 = ({param,param2,param3,param4,
                     location,location2,location3,
@@ -29,38 +27,32 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
     });
 
     const [loading,setIsloading] =useState(false);
-    const [enablesubmit2,sertenablesubmit2] =useState(false);
-        const daticos =[]
-    const getStringDataLocation =()=>{
-        let str =''
-        currentUsuario?.tipoUsuario == 'Residente' ? 
-        str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
-        : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
-        return str;
-    }
-    const Togglesubmit2 =()=>{
-        sertenablesubmit2(true)
-    }
-    const ayuda=(res,currentstr)=>{
-        axios.all(res?.map(function(result){
-            console.log(result)
-            let str = result.idTipoAgrupacion?result.idTipoAgrupacion:result.idtipoagrupacionconjunto?result.idtipoagrupacionconjunto+`/`+currentstr:result.idTipoInmueble
-            return axios.get(window.$dir+location2+`/`+ param3+`/`+ str)
-            .then(function(response){
-                if(level && level==2){
-                    return  axios.get(window.$dir+location3+`/`+ param4+`/`+ response.data.idTipoAgrupacion)
-                    .then(function(response){
-                        return  response.data
-                    });
+    const getStringDataLocation = useCallback(() => {
+        return currentUsuario?.tipoUsuario === 'Residente'
+            ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
+            : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
+    }, [currentUsuario, currentVivienda, currentConjunto]);
+    const ayuda = useCallback((res, currentstr) => {
+        axios.all(res?.map(result => {
+            let str = result.idTipoAgrupacion
+            ? result.idTipoAgrupacion
+            : result.idtipoagrupacionconjunto
+                ? `${result.idtipoagrupacionconjunto}/${currentstr}`
+                : result.idTipoInmueble;
+
+            return axios.get(`${window.$dir}${location2}/${param3}/${str}`)
+            .then(response => {
+                if (level && level === 2) {
+                return axios.get(`${window.$dir}${location3}/${param4}/${response.data.idTipoAgrupacion}`)
+                    .then(response => response.data);
                 }
-                else return response.data
+                return response.data;
             });
-        })).then(function(lista){
-            console.log(lista)
-            setIsloading(false)
-            setDatas2(lista)
-        })
-    }
+        })).then(lista => {
+            setIsloading(false);
+            setDatas2(lista);
+        });
+    }, [location2, param3, location3, param4, level]);
     const fetchData = useCallback(async () => {
         setIsloading(true)
         let currentstr = getStringDataLocation();
@@ -76,7 +68,7 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
         }).catch(
             e =>{console.log("Error: :c "+e)}
         )
-    },[param])
+    },[param, ayuda, getStringDataLocation, level, location])
 
     
 useEffect(()=>{
@@ -85,7 +77,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     submited(current)
-},[current])
+},[current, submited])
 
 const handleOnChange = (name, value) => {
     setCurrent({
@@ -96,13 +88,11 @@ const handleOnChange = (name, value) => {
         event.preventDefault();
         setIsloading(true)
         let body ={}
-        let body2 ={}
-        if (param2 = "newAgrupacion")
+        if (param2 === "newAgrupacion")
             body={
                 idtipoagrupacionconjunto:current.idItem,
                 numero:current.nItem}
-        let currentstr = getStringDataLocation();
-        axios.post(window.$dir+location+`/`+ param2, body)
+        axios.post(`${window.$dir}${location}/${param2}`, body)
         .then( function (response) {
             console.log(response.status);
             console.log(response.data);
@@ -128,7 +118,7 @@ const handleOnChange = (name, value) => {
                 <Box component="form" onSubmit={handleSubmit} noValidate> 
                 <Grid container spacing={2} justifyContent="center" alignItems="flex-start" >   
                     <Grid item xs={8} > 
-                        {datas2?.length!=0?
+                        {datas2?.length!==0?
                             <TextField variant="outlined" id="select" label={param} select required fullWidth
                                  >
                                     { 
@@ -167,7 +157,7 @@ const handleOnChange = (name, value) => {
                     enableSubmit?
                     <Box textAlign='center'>
                         {
-                            (current.idItem!='' && current.nItem!='' && !loading) ?
+                            (current.idItem!=='' && current.nItem!=='' && !loading) ?
                             <Button type="submit" variant="contained" color="success"endIcon={<SendIcon />}>Confirmar</Button>
                             :<div></div>
                         }{

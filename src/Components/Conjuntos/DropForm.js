@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,11 +11,6 @@ import SendIcon from '@mui/icons-material/Send';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
-import { getRadioUtilityClass } from "@mui/material";
-
-const defaultState = {
-    ans:''
-};
 
 const DropForm = ({param,param2,param3,stringStr,
                     location,location2,
@@ -24,18 +19,14 @@ const DropForm = ({param,param2,param3,stringStr,
                     level}) => {
     const [datas,setDatas] = useState([]);
     const [currentItem,setCurrentItem] = useState(0);
-    const [datas2,setDatas2] = useState([]);
     const [loading,setIsloading] =useState(false);
     const [enablesubmit2,sertenablesubmit2] =useState(false);
 
-    const getStringDataLocation =()=>{
-        let str =''
-
-        currentUsuario?.tipoUsuario == 'Residente' ? 
-        str = currentVivienda.idconjunto+`/`+currentUsuario.id+`/`+currentVivienda.idunidaddevivienda
-        : str = currentConjunto.idconjunto+`/`+currentConjunto.idusuarioadministrador+`/`+currentConjunto.id
-        return str;
-    }
+    const getStringDataLocation = useCallback(() => {
+        return currentUsuario?.tipoUsuario === 'Residente'
+            ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
+            : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
+    }, [currentUsuario, currentVivienda, currentConjunto]);
     const Togglesubmit2 =()=>{
         sertenablesubmit2(true)
     }
@@ -49,7 +40,7 @@ const DropForm = ({param,param2,param3,stringStr,
             }).catch(
                 e =>{console.log("Error: :c "+e)}
             )
-        },[param])
+        },[param, location, getStringDataLocation, stringStr])
     useEffect(()=>{
         fetchData()
     },[fetchData])
@@ -61,15 +52,14 @@ const DropForm = ({param,param2,param3,stringStr,
         Togglesubmit2(true)
         event.preventDefault();
         console.log(event.currentTarget)
-        const data = new FormData(event.currentTarget);
         // // enviar datos al back
         setIsloading(true)
         let body ={}
-        if (param2 == "newTipoAgrupacion")
+        if (param2 === "newTipoAgrupacion")
             body={
                 idconjunto:currentConjunto.idconjunto,
                 idTipoAgrupacion:currentItem}
-        if (param2 == "newInmueble")
+        if (param2 === "newInmueble")
             body={
             idconjunto:currentConjunto.idconjunto,
             idTipoInmueble: currentItem}
@@ -101,10 +91,10 @@ const DropForm = ({param,param2,param3,stringStr,
         <div>
                 <div>
                 <Box component="form" onSubmit={handleSubmit} noValidate> 
-                {datas.length!=0?
+                {datas.length!==0?
                     <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
                         onChange={Togglesubmit2} >
-                            {param=='unidadesDeViviendaConjuto'?
+                            {param==='unidadesDeViviendaConjuto'?
                             datas?.map((element)=>{
                                     return (
                                         <MenuItem id={element.idunidaddevivienda} 
@@ -152,7 +142,7 @@ const DropForm = ({param,param2,param3,stringStr,
                 enableSubmit?
                 <Box textAlign='center'>
                     {
-                        loading || datas.length==0?
+                        loading || datas.length===0?
                         <LoadingButton loading loadingPosition="start" startIcon={<CircularProgress size={14} />} variant="outlined">Loading..</LoadingButton>
                         :
                         enablesubmit2?

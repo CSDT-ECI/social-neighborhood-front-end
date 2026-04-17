@@ -3,35 +3,25 @@ import Feed from '../../Components/Feed';
 import Conjuntos from '../../Components/Conjuntos';
 import RegisterUser from  '../../Components/RegisterUser';
 import Rightbar from '../../Components/Rightbar';
-import {useParams} from 'react-router';
-import React,{useState,useEffect,useRef} from 'react'
-import { Users } from "../../testData";
+import {useState,useEffect} from 'react'
 import './admin.css';
 import ConfigurarConjuntos from '../../Components/ConfigurarConjuntos';
 import EditarUsuario from '../../Components/EditarUsuario';
-
-import axios from 'axios';
 import Swal from "sweetalert2";
-import zonasComunes from '../../Components/ZonasComunes';
 import ZonasComunes from '../../Components/ZonasComunes';
-import Alquiler from '../../Components/Alquiler';
 import { useHistory } from 'react-router-dom';
 
 const AdminDashboard = () => {
     let history = useHistory();
-    const [user, setUser] = useState({});
     const [section, setSection] = useState('Feed');
-    const [currentUser,setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
-    const [currentConjunto,setCurrentConjunto] = useState(JSON.parse(localStorage.getItem('conjunto')));
-    const [currentVivienda,setCurrentVivienda] = useState(JSON.parse(localStorage.getItem('vivienda')));
+    const [currentUser] = useState(JSON.parse(localStorage.getItem('user')));
+    const [currentConjunto] = useState(JSON.parse(localStorage.getItem('conjunto')));
+    const [currentVivienda] = useState(JSON.parse(localStorage.getItem('vivienda')));
     const changeSection = some => () =>{
         console.log(section)
         setSection(some)
      }
-     const sendRight = data => () => {
-        setRight(data);
-      };
-      const [right, setRight] = useState([]);
+      const [right] = useState([]);
 
     const switchSection = (param) =>{
         switch(param) {
@@ -49,6 +39,7 @@ const AdminDashboard = () => {
                 return <ZonasComunes  user={currentUser} conjunto={currentConjunto}/>;
             case 'Exit':
                 history.push("/");
+                break;
             default:
               return <Feed user={currentUser} conjunto={currentConjunto}/>;
           }
@@ -76,7 +67,7 @@ const AdminDashboard = () => {
 
         }
         fetchUser();
-    },[]);
+    },[currentConjunto, currentUser, currentVivienda]);
     return (
         <div className="adminContainer">
             <div className="fondo"/>
