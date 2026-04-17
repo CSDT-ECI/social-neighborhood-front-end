@@ -20,3 +20,4 @@
 11. [Análisis de Calidad y Herramientas Automatizadas](./CSDT_PrimeraEntrega.md)
 12. [Evaluación de DevEx y Productividad](./docs/devex_space_analysis.md)
 13. [Integración Continua con GitHub Actions](./docs/bitacora_ci_github_actions.md)
+14. [Vibe Coding y Spec-Driven Development: Prácticas, Ventajas y Retos](./docs/vibe_coding_spec_driven.md)
