@@ -1,3 +1,8 @@
+---
+title: "Clean Code y Principios"
+nav_order: 8
+---
+
 # Características de Clean Code y Principios de Programación
 
 ## Tabla de Contenidos
@@ -45,4 +50,4 @@
 - *SRP y DIP* son los que más suelen romperse en React cuando no hay separación de capas.
 - *Mejora concreta:* mover integración (API/Firebase) a servicios y dejar componentes más “limpios”.
 
-[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+[⬅ Volver al Índice Principal](./)

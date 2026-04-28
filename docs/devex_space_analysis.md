@@ -1,3 +1,8 @@
+---
+title: "Evaluación DevEx (SPACE)"
+nav_order: 12
+---
+
 # Evaluación de DevEx y Productividad (SPACE Framework)
 
 ---
@@ -68,4 +73,4 @@
 | **Métricas**          | Implementar SonarQube para medir calidad del código y productividad.         |
 
 ---
-[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+[⬅ Volver al Índice Principal](./)

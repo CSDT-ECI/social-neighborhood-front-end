@@ -1,3 +1,8 @@
+---
+title: "Integración Continua (CI)"
+nav_order: 13
+---
+
 # Implementación de Integración Continua (IC)
 
 ## Proyecto
@@ -77,9 +82,9 @@ Para una ejecución correcta del pipeline, se deben configurar estos secrets en 
 
 ## Evidencia técnica
 
-- Definición del pipeline: [.github/workflows/ci.yml](../.github/workflows/ci.yml)
-- Configuración de análisis: [sonar-project.properties](../sonar-project.properties)
-- Informe principal: [INFORME_DEUDA_TECNICA_CSDT-2026.md](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+- Definición del pipeline: [.github/workflows/ci.yml](https://github.com/CSDT-ECI/social-neighborhood-front-end/blob/main/.github/workflows/ci.yml)
+- Configuración de análisis: [sonar-project.properties](https://github.com/CSDT-ECI/social-neighborhood-front-end/blob/main/sonar-project.properties)
+- Informe principal: [Índice de la Bitácora](./)
 
 ---
-[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+[⬅ Volver al Índice Principal](./)

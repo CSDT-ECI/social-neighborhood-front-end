@@ -1,3 +1,8 @@
+---
+title: "Violaciones de Principios de Diseño"
+nav_order: 3
+---
+
 # Violaciones de Principios de Diseño
 
 ## Tabla de Contenidos
@@ -24,4 +29,4 @@
 - **Impacto**: La legibilidad del código se reduce, dificultando la depuración.
 - **Recomendación**: Simplificar los condicionales dividiéndolos en funciones más pequeñas.
 
-[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+[⬅ Volver al Índice Principal](./)
