@@ -1,6 +1,5 @@
 ---
 title: "Violaciones de Principios de Diseño"
-nav_order: 3
 ---
 
 # Violaciones de Principios de Diseño

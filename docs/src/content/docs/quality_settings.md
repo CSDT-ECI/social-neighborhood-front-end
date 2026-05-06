@@ -1,6 +1,5 @@
 ---
 title: "Análisis de Calidad y Herramientas"
-nav_order: 11
 ---
 
 # Análisis de Calidad y Herramientas Automatizadas

@@ -1,6 +1,5 @@
 ---
 title: "Estrategias de Refactorización"
-nav_order: 7
 ---
 
 # Estrategias de Refactorización Sugeridas

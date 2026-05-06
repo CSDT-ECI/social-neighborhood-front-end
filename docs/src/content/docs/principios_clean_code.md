@@ -1,6 +1,5 @@
 ---
 title: "Clean Code y Principios"
-nav_order: 8
 ---
 
 # Características de Clean Code y Principios de Programación

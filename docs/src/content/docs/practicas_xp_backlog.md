@@ -1,6 +1,5 @@
 ---
 title: "Prácticas XP y Backlog"
-nav_order: 9
 ---
 
 # Prácticas XP y Backlog de Acciones

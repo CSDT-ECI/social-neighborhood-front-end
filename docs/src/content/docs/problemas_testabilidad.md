@@ -1,6 +1,5 @@
 ---
 title: "Problemas de Testabilidad"
-nav_order: 6
 ---
 
 # Problemas de Testabilidad

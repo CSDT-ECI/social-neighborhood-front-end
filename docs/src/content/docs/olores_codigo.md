@@ -1,6 +1,5 @@
 ---
 title: "Olores de Código"
-nav_order: 4
 ---
 
 # Olores de Código

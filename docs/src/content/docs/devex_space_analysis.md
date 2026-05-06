@@ -1,6 +1,5 @@
 ---
 title: "Evaluación DevEx (SPACE)"
-nav_order: 12
 ---
 
 # Evaluación de DevEx y Productividad (SPACE Framework)

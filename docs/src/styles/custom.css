@@ -1,0 +1,63 @@
+/* ─── Accent: Violet/Purple ─────────────────────────────────── */
+:root {
+  --sl-color-accent-low:  #ede9fe;
+  --sl-color-accent:      #7c3aed;
+  --sl-color-accent-high: #4c1d95;
+}
+:root[data-theme='dark'] {
+  --sl-color-accent-low:  #2e1065;
+  --sl-color-accent:      #a855f7;
+  --sl-color-accent-high: #e9d5ff;
+}
+
+/* ─── Hero tagline ───────────────────────────────────────────── */
+.hero .tagline {
+  font-size: 1.25rem;
+  opacity: 0.85;
+}
+
+/* ─── Sidebar group labels ───────────────────────────────────── */
+.sidebar-group > summary,
+.sidebar-group > .group-label {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Badge color overrides per variant ─────────────────────── */
+.sl-badge.danger  { background: #fca5a5; color: #7f1d1d; }
+.sl-badge.caution { background: #fde68a; color: #78350f; }
+.sl-badge.tip     { background: #6ee7b7; color: #064e3b; }
+.sl-badge.note    { background: #93c5fd; color: #1e3a8a; }
+
+/* ─── Inline code ────────────────────────────────────────────── */
+:root[data-theme='light'] code:not(pre > code) {
+  background: #ede9fe;
+  color: #5b21b6;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+:root[data-theme='dark'] code:not(pre > code) {
+  background: #2e1065;
+  color: #d8b4fe;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ─── Table styling ──────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background: var(--sl-color-accent);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+tr:hover td {
+  background: var(--sl-color-accent-low);
+}

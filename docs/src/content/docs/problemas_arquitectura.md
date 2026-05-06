@@ -1,6 +1,5 @@
 ---
 title: "Problemas de Arquitectura"
-nav_order: 2
 ---
 
 # Problemas de Arquitectura

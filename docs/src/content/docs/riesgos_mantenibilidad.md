@@ -1,6 +1,5 @@
 ---
 title: "Riesgos de Mantenibilidad"
-nav_order: 5
 ---
 
 # Riesgos de Mantenibilidad

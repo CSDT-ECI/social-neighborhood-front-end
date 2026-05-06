@@ -1,0 +1,76 @@
+---
+title: Bitácora CSDT — Social Neighborhood Front-End
+description: Informe de Deuda Técnica y análisis de calidad del proyecto social-neighborhood-front-end
+template: splash
+hero:
+  tagline: Informe de Deuda Técnica y análisis de calidad del proyecto <code>social-neighborhood-front-end</code> — Escuela Colombiana de Ingeniería Julio Garavito · 2026
+  actions:
+    - text: Explorar Arquitectura
+      link: /social-neighborhood-front-end/problemas_arquitectura/
+      icon: right-arrow
+      variant: primary
+    - text: Ver en GitHub
+      link: https://github.com/CSDT-ECI/social-neighborhood-front-end
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Equipo
+
+| Nombre | GitHub |
+|--------|--------|
+| Juan Camilo Posso Guevara | [@JCPosso](https://github.com/JCPosso) |
+| Juan Sebastian Buitrago Piñeros | — |
+| Richard Santiago Urrea Garcia | [@RichardUG](https://github.com/RichardUG) |
+
+**Institución:** [Escuela Colombiana de Ingeniería Julio Garavito](https://www.escuelaing.edu.co/es/) · **Año:** 2026
+
+---
+
+## Secciones Principales
+
+<CardGrid stagger>
+  <Card title="Arquitectura y Diseño" icon="warning">
+    Problemas de modularización, URLs hardcodeadas, violaciones SOLID y 11 smells arquitectónicos identificados con Designite.
+
+    [Ver Arquitectura →](/social-neighborhood-front-end/problemas_arquitectura/)
+  </Card>
+  <Card title="Calidad de Código" icon="approve-check-circle">
+    Code smells, clean code, principios DRY/KISS/YAGNI, estrategias de refactorización y deuda de pruebas.
+
+    [Ver Calidad →](/social-neighborhood-front-end/olores_codigo/)
+  </Card>
+  <Card title="Proceso y Prácticas" icon="rocket">
+    XP, DevEx/SPACE, análisis de herramientas automatizadas, Dependabot, Snyk y Vibe Coding + Spec-Driven Development.
+
+    [Ver Prácticas →](/social-neighborhood-front-end/practicas_xp_backlog/)
+  </Card>
+  <Card title="CI/CD" icon="github">
+    Pipeline en GitHub Actions con build, tests, SonarCloud y OWASP Dependency Check.
+
+    [Ver CI/CD →](/social-neighborhood-front-end/bitacora_ci_github_actions/)
+  </Card>
+</CardGrid>
+
+---
+
+## Resumen Ejecutivo
+
+El proyecto `social-neighborhood-front-end` es una aplicación React que sirve de interfaz al sistema Social Neighborhood. El análisis de deuda técnica identificó problemas en cuatro dimensiones:
+
+<CardGrid>
+  <Card title="Arquitectura" icon="error">
+    URLs y configuración dispersas (`window.$dir`), componentes que mezclan UI + lógica + API, `AuthContext` definido pero nunca conectado, credenciales embebidas en el código fuente.
+  </Card>
+  <Card title="Calidad" icon="information">
+    Ausencia de pruebas unitarias en componentes críticos, dependencias desactualizadas con vulnerabilidades conocidas (Axios, Firebase), dos backends mezclados sin capa de abstracción.
+  </Card>
+  <Card title="Mantenibilidad" icon="setting">
+    Acoplamiento fuerte a `localStorage`, lógica repetida para rutas/errores/notificaciones, uso extensivo de `console.log` en producción.
+  </Card>
+  <Card title="CI/CD" icon="approve-check-circle">
+    Pipeline implementado en GitHub Actions con build, tests, SonarCloud y OWASP Dependency Check activos.
+  </Card>
+</CardGrid>

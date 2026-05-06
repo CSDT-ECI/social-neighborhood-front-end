@@ -1,6 +1,5 @@
 ---
 title: "Integración Continua (CI)"
-nav_order: 13
 ---
 
 # Implementación de Integración Continua (IC)

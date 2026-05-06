@@ -1,6 +1,5 @@
 ---
 title: "Testing Debt"
-nav_order: 10
 ---
 
 # Testing Debt en `social-neighborhood-front-end`
