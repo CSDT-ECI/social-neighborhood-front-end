@@ -27,6 +27,43 @@ const DropForm = ({param,param2,param3,stringStr,
             ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
             : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
     }, [currentUsuario, currentVivienda, currentConjunto]);
+
+    const buildRequestBody = useCallback(() => {
+        if (param2 === "newTipoAgrupacion") {
+            return {
+                idconjunto: currentConjunto.idconjunto,
+                idTipoAgrupacion: currentItem
+            };
+        }
+        if (param2 === "newInmueble") {
+            return {
+                idconjunto: currentConjunto.idconjunto,
+                idTipoInmueble: currentItem
+            };
+        }
+        return {};
+    }, [param2, currentItem, currentConjunto.idconjunto]);
+
+    const handleSubmitSuccess = useCallback(() => {
+        Swal.fire(
+            'Actualizado correctamente',
+            'success'
+        ).then((result) => {
+            if (result.isConfirmed) {
+                setIsloading(false);
+                submited();
+            }
+        });
+    }, [submited]);
+
+    const handleSubmitError = useCallback((errorx) => {
+        setIsloading(false);
+        Swal.fire(
+            "Este tipo ya existe en tu conjunto" + errorx,
+            "Intenta con otro tipo",
+            "error"
+        );
+    }, []);
     const Togglesubmit2 =()=>{
         sertenablesubmit2(true)
     }
@@ -49,43 +86,25 @@ const DropForm = ({param,param2,param3,stringStr,
         if(isenable)submited(val);
     }
     const handleSubmit = (event) => {
-        Togglesubmit2(true)
+        Togglesubmit2(true);
         event.preventDefault();
-        console.log(event.currentTarget)
-        // // enviar datos al back
-        setIsloading(true)
-        let body ={}
-        if (param2 === "newTipoAgrupacion")
-            body={
-                idconjunto:currentConjunto.idconjunto,
-                idTipoAgrupacion:currentItem}
-        if (param2 === "newInmueble")
-            body={
-            idconjunto:currentConjunto.idconjunto,
-            idTipoInmueble: currentItem}
-        let currentstr = getStringDataLocation();
-        console.log(body)
-        axios.post(window.$dir+location+`/`+ param2+`/`+ currentstr, body)
-        .then( function (response) {
-            console.log(response.status);
-            console.log(response.data);
-            if (response.status === 200) {
-            Swal.fire(
-                'Actualizado correctamente',
-                'success'
-                ).then((result) => {
-                    if (result.isConfirmed) {
-                        setIsloading(false)
-                        submited()
-                    } });
-            } else {
-            Swal.fire("Something is Wrong :(!", "try again later", "error");
-            }                                                               
-        })
-        .catch(function (errorx) {
-            setIsloading(false)
-            Swal.fire("Este tipo ya existe en tu conjunto"+errorx, "Intenta con otro tipo", "error");
-        });
+        setIsloading(true);
+        
+        const body = buildRequestBody();
+        const currentstr = getStringDataLocation();
+        
+        console.log(body);
+        axios.post(window.$dir + location + `/${param2}/${currentstr}`, body)
+            .then((response) => {
+                if (response.status === 200) {
+                    handleSubmitSuccess();
+                } else {
+                    Swal.fire("Something is Wrong :(!", "try again later", "error");
+                }
+            })
+            .catch((errorx) => {
+                handleSubmitError(errorx);
+            });
     };
     return (
         <div>
@@ -93,7 +112,7 @@ const DropForm = ({param,param2,param3,stringStr,
                 <Box component="form" onSubmit={handleSubmit} noValidate> 
                 {datas.length!==0?
                     <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
-                        onChange={Togglesubmit2} >
+                        onChange={() => Togglesubmit2()} >
                             {param==='unidadesDeViviendaConjuto'?
                             datas?.map((element)=>{
                                     return (

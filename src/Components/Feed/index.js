@@ -20,8 +20,8 @@ const Feed = ({user,conjunto}) => {
     const [rtData, setRTData] =  useState([])
     const [loading, isLoading] =  useState(false)
 
-    async function  loadDataRT(){
-        const suscriber = await db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
+    function  loadDataRT(){
+        const suscriber = db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
             const posts = []
             querySnapshot.forEach(documentSnapshot => {
                 posts.push({

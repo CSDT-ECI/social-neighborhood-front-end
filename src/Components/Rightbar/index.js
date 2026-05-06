@@ -14,8 +14,8 @@ const Rightbar = () => {
     const [show, setShow] =  useState(false)
     const [count, setCount] =  useState(0)
 
-    async function  loadDataRT(){
-        const suscriber = await db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
+    function  loadDataRT(){
+        const suscriber = db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
             const posts = []
             let cuenta =0;
             querySnapshot.forEach(documentSnapshot => {
