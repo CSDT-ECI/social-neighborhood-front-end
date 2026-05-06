@@ -7,6 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import DropForm from '../Conjuntos/DropForm'
 import './register.css';
+import PropTypes from 'prop-types';
 const EditarUsuario = ({user,conjunto}) => {
 
     const handleSubmit = (event) => {
@@ -70,3 +71,8 @@ const EditarUsuario = ({user,conjunto}) => {
 }
 
 export default EditarUsuario
+
+EditarUsuario.propTypes = {
+    user: PropTypes.object,
+    conjunto: PropTypes.object
+};

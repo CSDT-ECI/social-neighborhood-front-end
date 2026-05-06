@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
 import InputAdornment from '@mui/material/InputAdornment';
+import PropTypes from 'prop-types';
 
 const DropFormConjunto3 = ({param,param2,param3,
                     location,location2,
@@ -121,3 +122,19 @@ const handleOnChange = (name, value) => {
 }
 
 export default DropFormConjunto3
+DropFormConjunto3.propTypes = {
+    param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    param2: PropTypes.string,
+    param3: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    location: PropTypes.string,
+    location2: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    submited: PropTypes.func,
+    currentConjunto: PropTypes.object,
+    currentUsuario: PropTypes.object,
+    currentVivienda: PropTypes.object,
+    level: PropTypes.number
+};
+
+export default DropFormConjunto3;

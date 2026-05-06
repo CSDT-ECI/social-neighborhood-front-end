@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import DropFormConjunto2 from '../Conjuntos/DropFormConjunto2';
 import DropFormConjunto3 from '../Conjuntos/DropFormConjunto3';
+import PropTypes from 'prop-types';
 
 const ConfigurarConjuntos = ({user,conjunto}) => {
     
@@ -97,3 +98,9 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
 }
 
 export default ConfigurarConjuntos
+ConfigurarConjuntos.propTypes = {
+    user: PropTypes.object,
+    conjunto: PropTypes.object
+};
+
+export default ConfigurarConjuntos;

@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import SaveTwoToneIcon from '@mui/icons-material/SaveTwoTone';
 import IconButton from '@mui/material/IconButton';
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
+import PropTypes from 'prop-types';
 const defaultState = {
     numero:''
 }
@@ -34,7 +35,14 @@ function RowInput ({onChange,onRemove,type,numero}){
 }
 
 const DinamicForm = ({name,type,toggleNext}) => {
+RowInput.propTypes = {
+    onChange: PropTypes.func,
+    onRemove: PropTypes.func,
+    type: PropTypes.string,
+    numero: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
     const [rows, setRows] = useState([defaultState]);
+export default RowInput;
 
     const handleOnChange = (index, name, value) => {
         const copyRows = [...rows];

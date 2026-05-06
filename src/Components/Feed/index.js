@@ -15,6 +15,7 @@ import {db,storage} from './../../firebase/firebaseConfig';
 import {useDate} from '../../useDate'
 import Swal from "sweetalert2";
 import LoadingButton from '@mui/lab/LoadingButton';
+import PropTypes from 'prop-types';
 
 const Feed = ({user,conjunto}) => {
     const [rtData, setRTData] =  useState([])
@@ -119,3 +120,8 @@ const Feed = ({user,conjunto}) => {
 }
 
 export default Feed
+
+Feed.propTypes = {
+    user: PropTypes.object,
+    conjunto: PropTypes.object
+};

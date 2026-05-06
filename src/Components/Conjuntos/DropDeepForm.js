@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
 const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
     const [datas,setDatas]= useState([])
@@ -52,7 +53,17 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
             }
         })
         .catch(function (errorx) {
+        DropDeepForm.propTypes = {
+            param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            location: PropTypes.string,
+            onChange: PropTypes.func,
+            enableSubmit: PropTypes.bool,
+            param2: PropTypes.string,
+            currentConjunto: PropTypes.object,
+            submited: PropTypes.func
+        };
             Swal.fire(""+errorx, "try again later", "error");
+        export default DropDeepForm;
         });
     };
     return (

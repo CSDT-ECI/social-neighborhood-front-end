@@ -35,9 +35,17 @@ const getStringDataLocation =()=>{
     str = currentVivienda.idconjunto+`/`+user.id+`/`+currentVivienda.idunidaddevivienda
     : str = conjunto.idconjunto+`/`+conjunto.idusuarioadministrador+`/`+conjunto.id
     return str;
+import PropTypes from 'prop-types';
 }
+const ZonasComunes = ({conjunto,user,currentVivienda}) => {
 const [isAgrupacion] = useState(false);
+ZonasComunes.propTypes = {
+    conjunto: PropTypes.object,
+    user: PropTypes.object,
+    currentVivienda: PropTypes.object
+};
 
+export default ZonasComunes;
 const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

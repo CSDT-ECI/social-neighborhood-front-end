@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
 const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
     const [data,setData]= useState([])
@@ -83,6 +84,16 @@ const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentCo
         </div>
         
     )
+        DropFormConjunto.propTypes = {
+            param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            location: PropTypes.string,
+            onChange: PropTypes.func,
+            enableSubmit: PropTypes.bool,
+            param2: PropTypes.string,
+            currentConjunto: PropTypes.object,
+            submited: PropTypes.func
+        };
 }
+        export default DropFormConjunto;
 
 export default DropFormConjunto

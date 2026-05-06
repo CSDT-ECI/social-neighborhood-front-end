@@ -73,7 +73,14 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
   fetchData()
   },[fetchData])
 
+Leftbar.propTypes = {
+  user: PropTypes.object,
+  changeSection: PropTypes.func,
+  conjunto: PropTypes.object,
+  vivienda: PropTypes.object
+};
 
+import PropTypes from 'prop-types';
   const handleClick = () => {
     setOpen(!open);
   };
