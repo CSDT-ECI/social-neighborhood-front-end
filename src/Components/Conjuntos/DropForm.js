@@ -79,7 +79,7 @@ const DropForm = ({param,param2,param3,stringStr,
             }).catch(
                 (error_) =>{console.log("Error: :c "+error_)}
             )
-        },[param, location, getStringDataLocation, stringStr])
+        },[baseDir, param, location, getStringDataLocation, stringStr])
     useEffect(()=>{
         fetchData()
     },[fetchData])
