@@ -11,6 +11,7 @@ import SendIcon from '@mui/icons-material/Send';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
 const DropForm = ({param,param2,param3,stringStr,
                     location,location2,
@@ -27,20 +28,58 @@ const DropForm = ({param,param2,param3,stringStr,
             ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
             : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
     }, [currentUsuario, currentVivienda, currentConjunto]);
-    const Togglesubmit2 =()=>{
-        sertenablesubmit2(true)
+
+    const baseDir = (typeof window !== 'undefined' && window.$dir) || '';
+
+    const buildRequestBody = useCallback(() => {
+        if (param2 === "newTipoAgrupacion") {
+            return {
+                idconjunto: currentConjunto.idconjunto,
+                idTipoAgrupacion: currentItem
+            };
+        }
+        if (param2 === "newInmueble") {
+            return {
+                idconjunto: currentConjunto.idconjunto,
+                idTipoInmueble: currentItem
+            };
+        }
+        return {};
+    }, [param2, currentItem, currentConjunto.idconjunto]);
+
+    const handleSubmitSuccess = useCallback(() => {
+        Swal.fire(
+            'Actualizado correctamente',
+            'success'
+        ).then((result) => {
+            if (result.isConfirmed) {
+                setIsloading(false);
+                submited();
+            }
+        });
+    }, [submited]);
+
+    const handleSubmitError = useCallback((error_) => {
+        setIsloading(false);
+        Swal.fire(
+            "Este tipo ya existe en tu conjunto" + String(error_),
+            "Intenta con otro tipo",
+            "error"
+        );
+    }, []);
+    const Togglesubmit2 =(val = true)=>{
+        sertenablesubmit2(val)
     }
     const fetchData = useCallback(async () => {
             let currentstr = getStringDataLocation();
             if(stringStr)currentstr='';
 
-            await axios.get(window.$dir+location+`/`+ param+`/`+ currentstr
-            )
+            await axios.get(baseDir + location + `/${param}/${currentstr}`)
             .then( (res) =>{ setDatas(res.data)
             }).catch(
-                e =>{console.log("Error: :c "+e)}
+                (error_) =>{console.log("Error: :c "+error_)}
             )
-        },[param, location, getStringDataLocation, stringStr])
+        },[baseDir, param, location, getStringDataLocation, stringStr])
     useEffect(()=>{
         fetchData()
     },[fetchData])
@@ -49,43 +88,25 @@ const DropForm = ({param,param2,param3,stringStr,
         if(isenable)submited(val);
     }
     const handleSubmit = (event) => {
-        Togglesubmit2(true)
+        Togglesubmit2();
         event.preventDefault();
-        console.log(event.currentTarget)
-        // // enviar datos al back
-        setIsloading(true)
-        let body ={}
-        if (param2 === "newTipoAgrupacion")
-            body={
-                idconjunto:currentConjunto.idconjunto,
-                idTipoAgrupacion:currentItem}
-        if (param2 === "newInmueble")
-            body={
-            idconjunto:currentConjunto.idconjunto,
-            idTipoInmueble: currentItem}
-        let currentstr = getStringDataLocation();
-        console.log(body)
-        axios.post(window.$dir+location+`/`+ param2+`/`+ currentstr, body)
-        .then( function (response) {
-            console.log(response.status);
-            console.log(response.data);
-            if (response.status === 200) {
-            Swal.fire(
-                'Actualizado correctamente',
-                'success'
-                ).then((result) => {
-                    if (result.isConfirmed) {
-                        setIsloading(false)
-                        submited()
-                    } });
-            } else {
-            Swal.fire("Something is Wrong :(!", "try again later", "error");
-            }                                                               
-        })
-        .catch(function (errorx) {
-            setIsloading(false)
-            Swal.fire("Este tipo ya existe en tu conjunto"+errorx, "Intenta con otro tipo", "error");
-        });
+        setIsloading(true);
+        
+        const body = buildRequestBody();
+        const currentstr = getStringDataLocation();
+        
+        console.log(body);
+        axios.post(baseDir + location + `/${param2}/${currentstr}`, body)
+            .then((response) => {
+                if (response.status === 200) {
+                    handleSubmitSuccess();
+                } else {
+                    Swal.fire("Something is Wrong :(!", "try again later", "error");
+                }
+            })
+            .catch((error_) => {
+                handleSubmitError(error_);
+            });
     };
     return (
         <div>
@@ -93,7 +114,7 @@ const DropForm = ({param,param2,param3,stringStr,
                 <Box component="form" onSubmit={handleSubmit} noValidate> 
                 {datas.length!==0?
                     <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
-                        onChange={Togglesubmit2} >
+                        onChange={() => Togglesubmit2()} >
                             {param==='unidadesDeViviendaConjuto'?
                             datas?.map((element)=>{
                                     return (
@@ -159,5 +180,22 @@ const DropForm = ({param,param2,param3,stringStr,
         
     )
 }
+
+DropForm.propTypes = {
+    param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    param2: PropTypes.string,
+    param3: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    stringStr: PropTypes.string,
+    location: PropTypes.string,
+    location2: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    submited: PropTypes.func,
+    isenable: PropTypes.bool,
+    currentConjunto: PropTypes.object,
+    currentUsuario: PropTypes.object,
+    currentVivienda: PropTypes.object,
+    level: PropTypes.number
+};
 
 export default DropForm

@@ -16,6 +16,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import PropTypes from 'prop-types';
 
 const Alquiler = ({conjunto,user,vivienda,isEnabled,handleClose}) => {
 
@@ -105,7 +106,7 @@ const handleOnChange = (name, value) => {
                             <img
                                 alt=''
                                 src="/pool.png" 
-                                heigh="270px" width="270px"
+                                height="270px" width="270px"
                             />
                     </Paper>
                 </Grid>
@@ -164,3 +165,11 @@ const handleOnChange = (name, value) => {
     )
     }    
 export default Alquiler
+
+Alquiler.propTypes = {
+    conjunto: PropTypes.object,
+    user: PropTypes.object,
+    vivienda: PropTypes.object,
+    isEnabled: PropTypes.bool,
+    handleClose: PropTypes.func
+};

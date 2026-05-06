@@ -9,6 +9,7 @@ import './registerUser.css';
 
 import axios from 'axios';
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 const RegisterUser = ( {user,conjunto}) => {
     const handleSubmit = (event) => {
         let body={}
@@ -144,3 +145,8 @@ const RegisterUser = ( {user,conjunto}) => {
 }
 
 export default RegisterUser
+
+RegisterUser.propTypes = {
+        user: PropTypes.object,
+        conjunto: PropTypes.object
+};

@@ -32,27 +32,36 @@ const DropFormConjunto2 = ({param,param2,param3,param4,
             ? `${currentVivienda.idconjunto}/${currentUsuario.id}/${currentVivienda.idunidaddevivienda}`
             : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
     }, [currentUsuario, currentVivienda, currentConjunto]);
-    const ayuda = useCallback((res, currentstr) => {
-        axios.all(res?.map(result => {
-            let str = result.idTipoAgrupacion
-            ? result.idTipoAgrupacion
-            : result.idtipoagrupacionconjunto
-                ? `${result.idtipoagrupacionconjunto}/${currentstr}`
-                : result.idTipoInmueble;
+    const getItemString = useCallback((result, currentstr) => {
+        if (result.idTipoAgrupacion) {
+            return result.idTipoAgrupacion;
+        }
+        if (result.idtipoagrupacionconjunto) {
+            return `${result.idtipoagrupacionconjunto}/${currentstr}`;
+        }
+        return result.idTipoInmueble;
+    }, []);
 
+    const fetchItemDetails = useCallback((response) => {
+        if (level && level === 2) {
+            return axios.get(`${window.$dir}${location3}/${param4}/${response.data.idTipoAgrupacion}`)
+                .then(res => res.data);
+        }
+        return response.data;
+    }, [location3, param4, level]);
+
+    const ayuda = useCallback((res, currentstr) => {
+        const requests = res?.map(result => {
+            const str = getItemString(result, currentstr);
             return axios.get(`${window.$dir}${location2}/${param3}/${str}`)
-            .then(response => {
-                if (level && level === 2) {
-                return axios.get(`${window.$dir}${location3}/${param4}/${response.data.idTipoAgrupacion}`)
-                    .then(response => response.data);
-                }
-                return response.data;
-            });
-        })).then(lista => {
+                .then(fetchItemDetails);
+        });
+        
+        axios.all(requests).then(lista => {
             setIsloading(false);
             setDatas2(lista);
         });
-    }, [location2, param3, location3, param4, level]);
+    }, [location2, param3, getItemString, fetchItemDetails]);
     const fetchData = useCallback(async () => {
         setIsloading(true)
         let currentstr = getStringDataLocation();

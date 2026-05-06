@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyALKMqoN6XuESJ6ksEBrWM8tXHgZXweYGU",
     authDomain: "social-neighborhood.firebaseapp.com",
     databaseURL: "https://social-neighborhood-default-rtdb.firebaseio.com",

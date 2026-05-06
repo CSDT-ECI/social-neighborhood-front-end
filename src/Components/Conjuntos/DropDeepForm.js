@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
 const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjunto,submited}) => {
     const [datas,setDatas]= useState([])
@@ -39,20 +40,17 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
             idconjunto:currentConjunto,
             tipoInmuebleConjunto:data.id}
         axios.post(`https://socialneighborhood.herokuapp.com/admin/`+param2, body)
-        .then( function (response) {
+        .then(function (response) {
             console.log(response.status);
             console.log(response.data);
             if (response.status === 200) {
-            Swal.fire(
-                'Tipo actualizado correctamente',
-                'success'
-            )
+                Swal.fire('Tipo actualizado correctamente', 'success');
             } else {
-            Swal.fire("Something is Wrong :(!", "try again later", "error");
+                Swal.fire("Something is Wrong :(!", "try again later", "error");
             }
         })
         .catch(function (errorx) {
-            Swal.fire(""+errorx, "try again later", "error");
+            Swal.fire('Error', String(errorx), 'error');
         });
     };
     return (
@@ -92,5 +90,15 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
         
     )
 }
+
+DropDeepForm.propTypes = {
+    param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    location: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    param2: PropTypes.string,
+    currentConjunto: PropTypes.object,
+    submited: PropTypes.func
+};
 
 export default DropDeepForm

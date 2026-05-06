@@ -15,13 +15,14 @@ import {db,storage} from './../../firebase/firebaseConfig';
 import {useDate} from '../../useDate'
 import Swal from "sweetalert2";
 import LoadingButton from '@mui/lab/LoadingButton';
+import PropTypes from 'prop-types';
 
 const Feed = ({user,conjunto}) => {
     const [rtData, setRTData] =  useState([])
     const [loading, isLoading] =  useState(false)
 
-    async function  loadDataRT(){
-        const suscriber = await db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
+    function  loadDataRT(){
+        const suscriber = db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
             const posts = []
             querySnapshot.forEach(documentSnapshot => {
                 posts.push({
@@ -119,3 +120,8 @@ const Feed = ({user,conjunto}) => {
 }
 
 export default Feed
+
+Feed.propTypes = {
+    user: PropTypes.object,
+    conjunto: PropTypes.object
+};

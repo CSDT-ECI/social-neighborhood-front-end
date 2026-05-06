@@ -9,7 +9,11 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import Grow from '@mui/material/Grow';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PropTypes from 'prop-types';
 
+Post.propTypes = {
+  data: PropTypes.object
+};
 
 export default function Post({data}) {
 

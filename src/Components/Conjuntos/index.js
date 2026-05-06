@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import './conjuntos.css';
 import DropForm from './DropForm';
+import PropTypes from 'prop-types';
 
 const Conjuntos = ({user, conjunto}) => {
     const [isAgrupacion,setIsAgrupacion] = useState(false);
@@ -86,4 +87,9 @@ const Conjuntos = ({user, conjunto}) => {
     )
 }
 
-export default Conjuntos
+Conjuntos.propTypes = {
+    user: PropTypes.object,
+    conjunto: PropTypes.object
+};
+
+export default Conjuntos;

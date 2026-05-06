@@ -28,7 +28,7 @@ const HomeSection = () => {
                         </HeroBtnWrapper>
                     </HColumn1>
                     <HColumn2>
-                        <img alt='' src="./BackgroundHERO.png" heigh="500px" width="500px">
+                        <img alt='' src="./BackgroundHERO.png" height="500px" width="500px">
                         </img>
                     </HColumn2>
                     </HeroRow>

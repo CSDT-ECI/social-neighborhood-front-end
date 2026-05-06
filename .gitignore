@@ -49,3 +49,5 @@ out/
 .vscode/
 .code-workspace
 node_modules
+coverage/
+coverage

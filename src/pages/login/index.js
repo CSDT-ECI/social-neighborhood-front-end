@@ -49,12 +49,10 @@ const Login=()=>{
             )
             } else {
             Swal.fire("Dont send cache data :(!", "try again later", "error");
-            //history.push("/login");
             }
         })
         .catch(function (errorx) {
             Swal.fire(""+errorx, "try again later", "error");
-            //history.push("/login");
         });
     }
     const handleUser = (e) =>{

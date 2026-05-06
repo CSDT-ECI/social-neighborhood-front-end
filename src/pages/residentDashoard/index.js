@@ -54,7 +54,6 @@ const ResidentDashboard = () => {
             // redireccionar a login
             window.location.replace("/login")
         }
-        //const res = await axios.get(`/users?username=${username}`);
         console.log("current-------User")
         console.log(currentUser)
         console.log(currentVivienda)
