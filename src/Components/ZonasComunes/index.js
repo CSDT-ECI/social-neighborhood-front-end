@@ -19,7 +19,6 @@ import PropTypes from 'prop-types';
 
 const ZonasComunes = ({ conjunto, user, currentVivienda }) => {
   const [current, setCurrent] = useState({ idZonaComun: 0 });
-  const [isAgrupacion] = useState(false);
 
   const handleOnChange = (value) => {
     setCurrent({ ...current, idZonaComun: value });
