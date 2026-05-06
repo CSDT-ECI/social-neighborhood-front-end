@@ -34,15 +34,14 @@ function RowInput ({onChange,onRemove,type,numero}){
     )
 }
 
-const DinamicForm = ({name,type,toggleNext}) => {
 RowInput.propTypes = {
     onChange: PropTypes.func,
     onRemove: PropTypes.func,
     type: PropTypes.string,
     numero: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
+const DinamicForm = ({name,type,toggleNext}) => {
     const [rows, setRows] = useState([defaultState]);
-export default RowInput;
 
     const handleOnChange = (index, name, value) => {
         const copyRows = [...rows];
