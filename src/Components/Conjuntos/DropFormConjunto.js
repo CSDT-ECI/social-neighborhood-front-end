@@ -84,16 +84,16 @@ const DropFormConjunto = ({param,location,onChange,enableSubmit,param2,currentCo
         </div>
         
     )
-        DropFormConjunto.propTypes = {
-            param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            location: PropTypes.string,
-            onChange: PropTypes.func,
-            enableSubmit: PropTypes.bool,
-            param2: PropTypes.string,
-            currentConjunto: PropTypes.object,
-            submited: PropTypes.func
-        };
 }
-        export default DropFormConjunto;
+
+DropFormConjunto.propTypes = {
+    param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    location: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    param2: PropTypes.string,
+    currentConjunto: PropTypes.object,
+    submited: PropTypes.func
+};
 
 export default DropFormConjunto

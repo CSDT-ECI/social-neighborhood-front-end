@@ -40,30 +40,17 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
             idconjunto:currentConjunto,
             tipoInmuebleConjunto:data.id}
         axios.post(`https://socialneighborhood.herokuapp.com/admin/`+param2, body)
-        .then( function (response) {
+        .then(function (response) {
             console.log(response.status);
             console.log(response.data);
             if (response.status === 200) {
-            Swal.fire(
-                'Tipo actualizado correctamente',
-                'success'
-            )
+                Swal.fire('Tipo actualizado correctamente', 'success');
             } else {
-            Swal.fire("Something is Wrong :(!", "try again later", "error");
+                Swal.fire("Something is Wrong :(!", "try again later", "error");
             }
         })
         .catch(function (errorx) {
-        DropDeepForm.propTypes = {
-            param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            location: PropTypes.string,
-            onChange: PropTypes.func,
-            enableSubmit: PropTypes.bool,
-            param2: PropTypes.string,
-            currentConjunto: PropTypes.object,
-            submited: PropTypes.func
-        };
-            Swal.fire(""+errorx, "try again later", "error");
-        export default DropDeepForm;
+            Swal.fire('Error', String(errorx), 'error');
         });
     };
     return (
@@ -103,5 +90,15 @@ const DropDeepForm = ({param,location,onChange,enableSubmit,param2,currentConjun
         
     )
 }
+
+DropDeepForm.propTypes = {
+    param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    location: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    param2: PropTypes.string,
+    currentConjunto: PropTypes.object,
+    submited: PropTypes.func
+};
 
 export default DropDeepForm

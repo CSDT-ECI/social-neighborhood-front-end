@@ -79,24 +79,7 @@ const DropForm = ({param,param2,param3,stringStr,
                 e =>{console.log("Error: :c "+e)}
             )
         },[param, location, getStringDataLocation, stringStr])
-            DropForm.propTypes = {
-                param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-                param2: PropTypes.string,
-                param3: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-                stringStr: PropTypes.string,
-                location: PropTypes.string,
-                location2: PropTypes.string,
-                onChange: PropTypes.func,
-                enableSubmit: PropTypes.bool,
-                submited: PropTypes.func,
-                isenable: PropTypes.bool,
-                currentConjunto: PropTypes.object,
-                currentUsuario: PropTypes.object,
-                currentVivienda: PropTypes.object,
-                level: PropTypes.number
-            };
     useEffect(()=>{
-            export default DropForm;
         fetchData()
     },[fetchData])
     const handleCurrentItem = (val) =>{
@@ -196,5 +179,22 @@ const DropForm = ({param,param2,param3,stringStr,
         
     )
 }
+
+DropForm.propTypes = {
+    param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    param2: PropTypes.string,
+    param3: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    stringStr: PropTypes.string,
+    location: PropTypes.string,
+    location2: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    submited: PropTypes.func,
+    isenable: PropTypes.bool,
+    currentConjunto: PropTypes.object,
+    currentUsuario: PropTypes.object,
+    currentVivienda: PropTypes.object,
+    level: PropTypes.number
+};
 
 export default DropForm

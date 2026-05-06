@@ -120,8 +120,6 @@ const handleOnChange = (name, value) => {
         
     )
 }
-
-export default DropFormConjunto3
 DropFormConjunto3.propTypes = {
     param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     param2: PropTypes.string,

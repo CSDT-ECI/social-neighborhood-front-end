@@ -20,6 +20,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Exit from '@mui/icons-material/ExitToApp';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
@@ -73,14 +74,7 @@ export default function Leftbar({user,changeSection,conjunto,vivienda}) {
   fetchData()
   },[fetchData])
 
-Leftbar.propTypes = {
-  user: PropTypes.object,
-  changeSection: PropTypes.func,
-  conjunto: PropTypes.object,
-  vivienda: PropTypes.object
-};
 
-import PropTypes from 'prop-types';
   const handleClick = () => {
     setOpen(!open);
   };
@@ -164,4 +158,11 @@ import PropTypes from 'prop-types';
       </div>
     </div>
   );
-}
+  }
+
+  Leftbar.propTypes = {
+    user: PropTypes.object,
+    changeSection: PropTypes.func,
+    conjunto: PropTypes.object,
+    vivienda: PropTypes.object
+  };

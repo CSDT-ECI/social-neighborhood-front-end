@@ -97,7 +97,6 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
     )
 }
 
-export default ConfigurarConjuntos
 ConfigurarConjuntos.propTypes = {
     user: PropTypes.object,
     conjunto: PropTypes.object
