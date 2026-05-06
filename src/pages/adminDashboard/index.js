@@ -57,7 +57,6 @@ const AdminDashboard = () => {
             // redireccionar a login
             window.location.replace("/login")
         }
-        //const res = await axios.get(`/users?username=${username}`);
         console.log("current-------User")
         console.log(currentConjunto)
         console.log(currentUser)

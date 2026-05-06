@@ -88,7 +88,7 @@ const handleSubmit = (event) => {
                             <img
                                 alt=''
                                 src="/sport1.png" 
-                                heigh="270px" width="270px"
+                                height="270px" width="270px"
                             />
                     </Paper>
                 </Grid>
@@ -97,7 +97,7 @@ const handleSubmit = (event) => {
                             <img
                                 alt=''
                                 src="/sport2.png" 
-                                heigh="270px" width="270px"
+                                height="270px" width="270px"
                             />
                     </Paper>
                 </Grid>
@@ -106,7 +106,7 @@ const handleSubmit = (event) => {
                             <img
                                 alt=''
                                 src="/sport3.png" 
-                                heigh="270px" width="270px"
+                                height="270px" width="270px"
                             />
                     </Paper>
                 </Grid>

@@ -105,7 +105,7 @@ const handleOnChange = (name, value) => {
                             <img
                                 alt=''
                                 src="/pool.png" 
-                                heigh="270px" width="270px"
+                                height="270px" width="270px"
                             />
                     </Paper>
                 </Grid>
