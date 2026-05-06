@@ -46,7 +46,7 @@ const ZonasComunes = ({ conjunto, user, currentVivienda }) => {
 
     const currentstr = getStringDataLocation();
     axios
-      .post(`${window.$dir}admin/newzonaComunConjunto/${currentstr}`, body)
+      .post(`${globalThis.$dir}admin/newzonaComunConjunto/${currentstr}`, body)
       .then((response) => {
         if (response.status === 200) {
           Swal.fire('Actualizado correctamente', 'success');
@@ -54,7 +54,7 @@ const ZonasComunes = ({ conjunto, user, currentVivienda }) => {
           Swal.fire('Something is Wrong :(!', 'try again later', 'error');
         }
       })
-      .catch((errorx) => {
+      .catch((error_) => {
         Swal.fire('Esta zona comun ya existe! :(!', 'intenta con otra  zona de tu conjunto', 'error');
       });
   };

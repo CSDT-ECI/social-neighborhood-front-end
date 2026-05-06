@@ -57,26 +57,26 @@ const DropForm = ({param,param2,param3,stringStr,
         });
     }, [submited]);
 
-    const handleSubmitError = useCallback((errorx) => {
+    const handleSubmitError = useCallback((error_) => {
         setIsloading(false);
         Swal.fire(
-            "Este tipo ya existe en tu conjunto" + errorx,
+            "Este tipo ya existe en tu conjunto" + String(error_),
             "Intenta con otro tipo",
             "error"
         );
     }, []);
-    const Togglesubmit2 =()=>{
-        sertenablesubmit2(true)
+    const Togglesubmit2 =(val = true)=>{
+        sertenablesubmit2(val)
     }
     const fetchData = useCallback(async () => {
             let currentstr = getStringDataLocation();
             if(stringStr)currentstr='';
 
-            await axios.get(window.$dir+location+`/`+ param+`/`+ currentstr
+            await axios.get(globalThis.$dir+location+`/`+ param+`/`+ currentstr
             )
             .then( (res) =>{ setDatas(res.data)
             }).catch(
-                e =>{console.log("Error: :c "+e)}
+                (error_) =>{console.log("Error: :c "+error_)}
             )
         },[param, location, getStringDataLocation, stringStr])
     useEffect(()=>{
@@ -87,7 +87,7 @@ const DropForm = ({param,param2,param3,stringStr,
         if(isenable)submited(val);
     }
     const handleSubmit = (event) => {
-        Togglesubmit2(true);
+        Togglesubmit2();
         event.preventDefault();
         setIsloading(true);
         
@@ -95,7 +95,7 @@ const DropForm = ({param,param2,param3,stringStr,
         const currentstr = getStringDataLocation();
         
         console.log(body);
-        axios.post(window.$dir + location + `/${param2}/${currentstr}`, body)
+        axios.post(globalThis.$dir + location + `/${param2}/${currentstr}`, body)
             .then((response) => {
                 if (response.status === 200) {
                     handleSubmitSuccess();
@@ -103,8 +103,8 @@ const DropForm = ({param,param2,param3,stringStr,
                     Swal.fire("Something is Wrong :(!", "try again later", "error");
                 }
             })
-            .catch((errorx) => {
-                handleSubmitError(errorx);
+            .catch((error_) => {
+                handleSubmitError(error_);
             });
     };
     return (
