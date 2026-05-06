@@ -29,6 +29,8 @@ const DropForm = ({param,param2,param3,stringStr,
             : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
     }, [currentUsuario, currentVivienda, currentConjunto]);
 
+    const baseDir = (typeof window !== 'undefined' && window.$dir) || '';
+
     const buildRequestBody = useCallback(() => {
         if (param2 === "newTipoAgrupacion") {
             return {
@@ -72,8 +74,7 @@ const DropForm = ({param,param2,param3,stringStr,
             let currentstr = getStringDataLocation();
             if(stringStr)currentstr='';
 
-            await axios.get(globalThis.$dir+location+`/`+ param+`/`+ currentstr
-            )
+            await axios.get(baseDir + location + `/${param}/${currentstr}`)
             .then( (res) =>{ setDatas(res.data)
             }).catch(
                 (error_) =>{console.log("Error: :c "+error_)}
@@ -95,7 +96,7 @@ const DropForm = ({param,param2,param3,stringStr,
         const currentstr = getStringDataLocation();
         
         console.log(body);
-        axios.post(globalThis.$dir + location + `/${param2}/${currentstr}`, body)
+        axios.post(baseDir + location + `/${param2}/${currentstr}`, body)
             .then((response) => {
                 if (response.status === 200) {
                     handleSubmitSuccess();

@@ -44,9 +44,10 @@ const ZonasComunes = ({ conjunto, user, currentVivienda }) => {
       tiempomaximoalquiler: data.get('tiempoMaximo'),
     };
 
+    const baseDir = (typeof window !== 'undefined' && window.$dir) || '';
     const currentstr = getStringDataLocation();
     axios
-      .post(`${globalThis.$dir}admin/newzonaComunConjunto/${currentstr}`, body)
+      .post(`${baseDir}admin/newzonaComunConjunto/${currentstr}`, body)
       .then((response) => {
         if (response.status === 200) {
           Swal.fire('Actualizado correctamente', 'success');
