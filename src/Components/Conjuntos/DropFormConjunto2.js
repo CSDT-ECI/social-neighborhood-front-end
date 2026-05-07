@@ -11,6 +11,7 @@ import SendIcon from '@mui/icons-material/Send';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 
 const DropFormConjunto2 = ({param,param2,param3,param4,
                     location,location2,location3,
@@ -184,5 +185,26 @@ const handleOnChange = (name, value) => {
         
     )
 }
+
+DropFormConjunto2.propTypes = {
+    param: PropTypes.string,
+    param2: PropTypes.string,
+    param3: PropTypes.string,
+    param4: PropTypes.string,
+    location: PropTypes.string,
+    location2: PropTypes.string,
+    location3: PropTypes.string,
+    onChange: PropTypes.func,
+    enableSubmit: PropTypes.bool,
+    submited: PropTypes.func,
+    submited2: PropTypes.func,
+    currentConjunto: PropTypes.object,
+    currentUsuario: PropTypes.object,
+    currentVivienda: PropTypes.object,
+    submiting: PropTypes.bool,
+    needNumber: PropTypes.bool,
+    submiting2: PropTypes.bool,
+    level: PropTypes.number,
+};
 
 export default DropFormConjunto2

@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 
 const Feed = ({user,conjunto}) => {
     const [rtData, setRTData] =  useState([])
-    const [loading, isLoading] =  useState(false)
+    const [loading, setLoading] =  useState(false)
 
     function  loadDataRT(){
         const suscriber = db.collection('Post').orderBy("fechaPublicacion", "desc").onSnapshot(querySnapshot =>{
@@ -55,20 +55,20 @@ const Feed = ({user,conjunto}) => {
             imagen: fileUrl,
             nombreUsuario: user.nombres,
             texto: e.target.inputPost.value
-        }).catch(function (errorx) {
+        }).catch(function (error_) {
             Swal.fire("Error de servidor :(!", "Intenta de nuevo", "error");
         });
         setFileUrl(null)
         e.target.reset()
       }
     const onFileChange = async(e) =>{
-        isLoading(true);
+        setLoading(true);
         const file  = e.target.files[0]
         const storageRef = storage.ref()
         const fileRef  = storageRef.child(file.name)
         await fileRef.put(file)
         setFileUrl(await  fileRef.getDownloadURL())
-        isLoading(false);
+        setLoading(false);
     }
     return (
     <div className="feed">
@@ -94,14 +94,14 @@ const Feed = ({user,conjunto}) => {
                     />
             </CardContent>
             <CardActions disableSpacing>
-                <Button variant="contained"component="label" color="info"endIcon={<ImageIcon />}>
-                        Upload image
-                        <input onChange={onFileChange} type="file" name="file" hidden/>
+                <Button variant="contained" component="label" color="info" endIcon={<ImageIcon />}>
+                        {'Upload image'}
+                        <input onChange={onFileChange} type="file" name="file" hidden />
                 </Button>
                 {
-                    (!loading)?
-                    <Button type="submit" variant="contained" color="info" sx={{ ml: 50}}>Publish</Button>
-                    : <LoadingButton loading  variant="outlined"></LoadingButton>
+                    loading
+                    ? <LoadingButton loading  variant="outlined"></LoadingButton>
+                    : <Button type="submit" variant="contained" color="info" sx={{ ml: 50}}>Publish</Button>
                 }
              </CardActions>
              </Box>

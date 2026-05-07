@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -12,10 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@mui/material/Grid';
 
 import './register.css';
-const defaultState = {
-    conjunto: "",
-    unidad: ""
-  };
+const createEditRow = () => ({ conjunto: '', unidad: '', _id: Math.random() });
 function Viviendas ({onRemove,onChange}){
     return(
         <div>
@@ -51,15 +49,19 @@ function Viviendas ({onRemove,onChange}){
         </div>
     )
 }
+Viviendas.propTypes = {
+    onChange: PropTypes.func,
+    onRemove: PropTypes.func,
+};
 const EditarUsuario = () => {
 
-    const [currentConjuntoData,SetCurrentConjuntoData] = useState({});
+    const [currentConjuntoData, setCurrentConjuntoData] = useState({});
     const toggleConjunto =(e)=>{
-        SetCurrentConjuntoData(e.target.value)
+        setCurrentConjuntoData(e.target.value)
         console.log(currentConjuntoData)
     }
 
-    const [rows, setRows] = useState([defaultState]);
+    const [rows, setRows] = useState([createEditRow()]);
     const handleOnChange = (index, name, value) => {
         const copyRows = [...rows];
         copyRows[index] = {
@@ -69,7 +71,7 @@ const EditarUsuario = () => {
         setRows(copyRows);
       };
     const handleOnAdd = () => {
-    setRows(rows.concat(defaultState));
+    setRows(rows.concat(createEditRow()));
     };
 
     const handleSubmit = (event) => {
@@ -114,7 +116,7 @@ const EditarUsuario = () => {
                     {...row}
                     onChange={(name, value) => handleOnChange(index, name, value)}
                     onRemove={() => handleOnRemove(index)}
-                    key={index}
+                    key={row._id}
                     />
                 ))}
             <Button onClick={handleOnAdd} variant="contained" color="success">Agregar</Button>

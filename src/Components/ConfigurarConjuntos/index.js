@@ -24,7 +24,42 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
         setIsUnidad(true);
         }
     const toggleUnidads =()=>{}
-    
+
+    const renderFormSection = () => {
+        if (isAgrupacion) {
+            return (
+                <div>
+                <br/>
+                <DropFormConjunto2
+                    param='TipoAgrupacionesPropia'
+                    location='admin'
+                    currentConjunto={conjunto}
+                    currentUsuario={user}
+                    location2='social'
+                    param3='tipoAgrupacionById'
+                    level={1}
+                    enableSubmit={true}
+                    param2='newAgrupacion'
+                    submited={toggleUnidads}
+                />
+                </div>
+            );
+        }
+        if (isUnidad) {
+            return (
+                <div>
+                    <DropFormConjunto3 param='TipoAgrupacionesPropia2'
+                            location='admin' enableSubmit={false}
+                            currentConjunto={conjunto} currentUsuario={user}
+                            location2='social' param3='tipoAgrupacionById2'
+                            param2='newAgrupacion2'
+                            />
+                </div>
+            );
+        }
+        return <div></div>;
+    };
+
     return (
         <Box sx={{  flexGrow: 1,mx:0}} className="card">
         <Typography variant="h4" align="center" component="h1" gutterBottom>Configuracion de Conjuntos</Typography>
@@ -55,42 +90,7 @@ const ConfigurarConjuntos = ({user,conjunto}) => {
                        </Stack>:
                        <div></div>
                     </Stack>
-                    {
-                        isAgrupacion? 
-                            //tendria una lista de ids ahora hacer match de esas ids  con su nombre
-                            //por cada dato en tipo de agrupaciones propias hacer: 
-                            // axios.get tipo agrupacionbyId y si resulta meterlo a un menuList y sale
-                            //añadir input del numero y se sube con un post a newAgrupacion
-                            //al otro lado hace get agrupacion y hace match con el nombre respectivo
-                            //por ello se va crear un nuevo tipo de form llamado dropMetaForm.js
-                            <div>
-                            <br/>
-                            <DropFormConjunto2 
-                                param='TipoAgrupacionesPropia' 
-                                location='admin' 
-                                currentConjunto={conjunto} 
-                                currentUsuario={user} 
-                                location2='social' 
-                                param3='tipoAgrupacionById' 
-                                level={1} 
-                                enableSubmit={true}   // <- duplicada
-                                param2='newAgrupacion'
-                                submited={toggleUnidads}
-                            />
-                            </div>
-                        :
-                        isUnidad?
-                        <div>
-                            <DropFormConjunto3 param='TipoAgrupacionesPropia2' 
-                                    location='admin' enableSubmit={false} 
-                                    currentConjunto ={conjunto} currentUsuario={user} 
-                                    location2='social' param3='tipoAgrupacionById2' 
-                                    param2='newAgrupacion2' 
-                                    />
-                        </div>
-                            :
-                        <div></div>
-                    }
+                    {renderFormSection()}
                 </Grid> 
             </Grid>
         </Box>
