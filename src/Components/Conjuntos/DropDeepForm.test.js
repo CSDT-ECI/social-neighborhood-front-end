@@ -1,22 +1,51 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import DropDeepForm from './DropDeepForm';
 import axios from 'axios';
 
 jest.mock('axios');
 jest.mock('sweetalert2', () => ({ fire: jest.fn() }));
-jest.mock('@mui/material/TextField', () => ({ children, label, select, ...props }) =>
-  select ? <div data-testid="select">{children}</div> : <input aria-label={label} {...props} />
-);
-jest.mock('@mui/material/MenuItem', () => ({ children, onClick }) => (
-  <button onClick={onClick}>{children}</button>
-));
-jest.mock('@mui/material/Box', () => ({ children, component: C = 'div', ...props }) => (
-  <C {...props}>{children}</C>
-));
-jest.mock('@mui/material/Button', () => ({ children, ...props }) => (
-  <button {...props}>{children}</button>
-));
+function mockTextField({ children, label, select, ...props }) {
+  return select ? <div data-testid="select">{children}</div> : <input aria-label={label} {...props} />;
+}
+
+mockTextField.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+  select: PropTypes.bool,
+};
+
+function mockMenuItem({ children, onClick }) {
+  return <button onClick={onClick}>{children}</button>;
+}
+
+mockMenuItem.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+};
+
+function mockBox({ children, component: Component = 'div', ...props }) {
+  return <Component {...props}>{children}</Component>;
+}
+
+mockBox.propTypes = {
+  children: PropTypes.node,
+  component: PropTypes.elementType,
+};
+
+function mockButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockButton.propTypes = {
+  children: PropTypes.node,
+};
+
+jest.mock('@mui/material/TextField', () => mockTextField);
+jest.mock('@mui/material/MenuItem', () => mockMenuItem);
+jest.mock('@mui/material/Box', () => mockBox);
+jest.mock('@mui/material/Button', () => mockButton);
 jest.mock('@mui/icons-material/Send', () => () => <span>send</span>);
 
 describe('DropDeepForm', () => {

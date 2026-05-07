@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import mockPropTypes from 'prop-types';
 import DropFormConjunto2 from './DropFormConjunto2';
 import axios from 'axios';
 
@@ -10,19 +11,58 @@ jest.mock('axios', () => ({
 }));
 jest.mock('sweetalert2', () => ({ fire: jest.fn().mockResolvedValue({ isConfirmed: true }) }));
 
-jest.mock('@mui/material/Box', () => ({ children, component: Component = 'div', ...props }) => (
-  <Component {...props}>{children}</Component>
-));
+function mockBox({ children, component: Component = 'div', ...props }) {
+  return <Component {...props}>{children}</Component>;
+}
 
-jest.mock('@mui/material/Grid', () => ({ children, ...props }) => <div {...props}>{children}</div>);
-jest.mock('@mui/material/Button', () => ({ children, ...props }) => <button {...props}>{children}</button>);
-jest.mock('@mui/lab/LoadingButton', () => ({ children, ...props }) => <button {...props}>{children}</button>);
-jest.mock('@mui/material/CircularProgress', () => () => <span>loading</span>);
-jest.mock('@mui/icons-material/Send', () => () => <span>send</span>);
+mockBox.propTypes = {
+  children: mockPropTypes.node,
+  component: mockPropTypes.elementType,
+};
+
+function mockGrid({ children, ...props }) {
+  return <div {...props}>{children}</div>;
+}
+
+mockGrid.propTypes = {
+  children: mockPropTypes.node,
+};
+
+function mockButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockButton.propTypes = {
+  children: mockPropTypes.node,
+};
+
+function mockLoadingButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockLoadingButton.propTypes = {
+  children: mockPropTypes.node,
+};
+
+function mockCircularProgress() {
+  return <span>loading</span>;
+}
+
+function mockSend() {
+  return <span>send</span>;
+}
+
+jest.mock('@mui/material/Box', () => mockBox);
+jest.mock('@mui/material/Grid', () => mockGrid);
+jest.mock('@mui/material/Button', () => mockButton);
+jest.mock('@mui/lab/LoadingButton', () => mockLoadingButton);
+jest.mock('@mui/material/CircularProgress', () => mockCircularProgress);
+jest.mock('@mui/icons-material/Send', () => mockSend);
+
 jest.mock('@mui/material/MenuItem', () => {
   const React = require('react');
 
-  return ({ children, onClick, ...props }) => {
+  function mockMenuItem({ children, onClick, ...props }) {
     React.useEffect(() => {
       if (onClick) {
         onClick({});
@@ -34,9 +74,16 @@ jest.mock('@mui/material/MenuItem', () => {
         {children}
       </button>
     );
+  }
+
+  mockMenuItem.propTypes = {
+    children: mockPropTypes.node,
+    onClick: mockPropTypes.func,
   };
+
+  return mockMenuItem;
 });
-jest.mock('@mui/material/TextField', () => ({ children, label, select, id, onChange, ...props }) => {
+function mockTextField({ children, label, select, id, onChange, ...props }) {
   if (select) {
     return (
       <div data-testid={`select-${label}`}>
@@ -47,7 +94,17 @@ jest.mock('@mui/material/TextField', () => ({ children, label, select, id, onCha
   }
 
   return <input aria-label={label} id={id} onChange={onChange} {...props} />;
-});
+}
+
+mockTextField.propTypes = {
+  children: mockPropTypes.node,
+  label: mockPropTypes.string,
+  select: mockPropTypes.bool,
+  id: mockPropTypes.string,
+  onChange: mockPropTypes.func,
+};
+
+jest.mock('@mui/material/TextField', () => mockTextField);
 
 describe('DropFormConjunto2', () => {
   beforeEach(() => {

@@ -1,4 +1,5 @@
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useMemo} from 'react';
+import PropTypes from 'prop-types';
 import {FaBars} from 'react-icons/fa';
 import {IconContext} from 'react-icons/lib';
 import {animateScroll as scroll } from 'react-scroll';
@@ -30,9 +31,9 @@ const Navbar = ({toggle}) => {
     const toggleHome =() =>{
         scroll.scrollToTop();
     }
+    const providerValue = useMemo(() => ({ color: '#fff' }), []);
     return (
-        <>
-        <IconContext.Provider value={{color: "#fff"}}>
+        <IconContext.Provider value={providerValue}>
         {/*create with rafce command'*/}
             <Nav scrollNav={scrollNav}>
                 <NavbarContainer >
@@ -50,7 +51,11 @@ const Navbar = ({toggle}) => {
                 </NavbarContainer>
             </Nav>
             </IconContext.Provider> 
-        </>
     )
 }
+
+Navbar.propTypes = {
+    toggle: PropTypes.func,
+};
+
 export default Navbar

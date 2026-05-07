@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import PropTypes from 'prop-types';
 
 const mockSet = jest.fn().mockResolvedValue(undefined);
 const mockPut = jest.fn().mockResolvedValue(undefined);
@@ -43,16 +44,96 @@ jest.mock('../../firebase/firebaseConfig', () => ({
   },
 }));
 
-jest.mock('@mui/material/Card', () => ({ children, ...props }) => <div {...props}>{children}</div>);
-jest.mock('@mui/material/CardHeader', () => ({ title, avatar }) => <div><span>{title}</span>{avatar}</div>);
-jest.mock('@mui/material/CardContent', () => ({ children }) => <div>{children}</div>);
-jest.mock('@mui/material/CardActions', () => ({ children }) => <div>{children}</div>);
-jest.mock('@mui/material/Avatar', () => ({ children }) => <div>{children}</div>);
-jest.mock('@mui/material/TextField', () => ({ label, id, name, ...props }) => <input aria-label={label} id={id} name={name} {...props} />);
-jest.mock('@mui/material/Button', () => ({ children, ...props }) => <button {...props}>{children}</button>);
-jest.mock('@mui/material/Box', () => ({ children, component: Component = 'div', ...props }) => <Component {...props}>{children}</Component>);
-jest.mock('@mui/lab/LoadingButton', () => ({ children, ...props }) => <button {...props}>{children}</button>);
-jest.mock('@mui/icons-material/Image', () => () => <span>image</span>);
+function mockCard({ children, ...props }) {
+  return <div {...props}>{children}</div>;
+}
+
+mockCard.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockCardHeader({ title, avatar }) {
+  return <div><span>{title}</span>{avatar}</div>;
+}
+
+mockCardHeader.propTypes = {
+  title: PropTypes.node,
+  avatar: PropTypes.node,
+};
+
+function mockCardContent({ children }) {
+  return <div>{children}</div>;
+}
+
+mockCardContent.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockCardActions({ children }) {
+  return <div>{children}</div>;
+}
+
+mockCardActions.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockAvatar({ children }) {
+  return <div>{children}</div>;
+}
+
+mockAvatar.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockTextField({ label, id, name, ...props }) {
+  return <input aria-label={label} id={id} name={name} {...props} />;
+}
+
+mockTextField.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
+};
+
+function mockButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockButton.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockBox({ children, component: Component = 'div', ...props }) {
+  return <Component {...props}>{children}</Component>;
+}
+
+mockBox.propTypes = {
+  children: PropTypes.node,
+  component: PropTypes.elementType,
+};
+
+function mockLoadingButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockLoadingButton.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockImage() {
+  return <span>image</span>;
+}
+
+jest.mock('@mui/material/Card', () => mockCard);
+jest.mock('@mui/material/CardHeader', () => mockCardHeader);
+jest.mock('@mui/material/CardContent', () => mockCardContent);
+jest.mock('@mui/material/CardActions', () => mockCardActions);
+jest.mock('@mui/material/Avatar', () => mockAvatar);
+jest.mock('@mui/material/TextField', () => mockTextField);
+jest.mock('@mui/material/Button', () => mockButton);
+jest.mock('@mui/material/Box', () => mockBox);
+jest.mock('@mui/lab/LoadingButton', () => mockLoadingButton);
+jest.mock('@mui/icons-material/Image', () => mockImage);
 jest.mock('sweetalert2', () => ({ fire: jest.fn().mockResolvedValue({}) }));
 
 import Feed from './index';

@@ -1,18 +1,74 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import Leftbar from './index';
 import axios from 'axios';
 
 jest.mock('axios');
-jest.mock('@material-ui/core/Divider', () => () => <hr />);
-jest.mock('@mui/material/Avatar', () => ({ alt, src }) => <img alt={alt} src={src} />);
-jest.mock('@mui/material/List', () => ({ children }) => <ul>{children}</ul>);
-jest.mock('@mui/material/ListItemButton', () => ({ children, onClick, name }) => (
-  <li role="button" name={name} onClick={onClick}>{children}</li>
-));
-jest.mock('@mui/material/ListItemIcon', () => ({ children }) => <span>{children}</span>);
-jest.mock('@mui/material/ListItemText', () => ({ children, className }) => <span>{children}</span>);
-jest.mock('@mui/material/Collapse', () => ({ children, in: open }) => open ? <div>{children}</div> : null);
+function mockDivider() {
+  return <hr />;
+}
+
+function mockAvatar({ alt, src }) {
+  return <img alt={alt} src={src} />;
+}
+
+mockAvatar.propTypes = {
+  alt: PropTypes.string,
+  src: PropTypes.string,
+};
+
+function mockList({ children }) {
+  return <ul>{children}</ul>;
+}
+
+mockList.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockListItemButton({ children, onClick, name }) {
+  return <li role="button" name={name} onClick={onClick}>{children}</li>;
+}
+
+mockListItemButton.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  name: PropTypes.string,
+};
+
+function mockListItemIcon({ children }) {
+  return <span>{children}</span>;
+}
+
+mockListItemIcon.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockListItemText({ children, className }) {
+  return <span>{children}</span>;
+}
+
+mockListItemText.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
+
+function mockCollapse({ children, in: open }) {
+  return open ? <div>{children}</div> : null;
+}
+
+mockCollapse.propTypes = {
+  children: PropTypes.node,
+  in: PropTypes.bool,
+};
+
+jest.mock('@material-ui/core/Divider', () => mockDivider);
+jest.mock('@mui/material/Avatar', () => mockAvatar);
+jest.mock('@mui/material/List', () => mockList);
+jest.mock('@mui/material/ListItemButton', () => mockListItemButton);
+jest.mock('@mui/material/ListItemIcon', () => mockListItemIcon);
+jest.mock('@mui/material/ListItemText', () => mockListItemText);
+jest.mock('@mui/material/Collapse', () => mockCollapse);
 jest.mock('@mui/icons-material/ExpandLess', () => () => <span>less</span>);
 jest.mock('@mui/icons-material/ExpandMore', () => () => <span>more</span>);
 jest.mock('@mui/icons-material/Settings', () => () => <span>settings</span>);

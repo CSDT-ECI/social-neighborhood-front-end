@@ -1,10 +1,17 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import Conjuntos from './index';
 
-jest.mock('./DropForm', () => (props) => (
-  <div data-testid="drop-form">{props.param}</div>
-));
+function mockDropForm({ param }) {
+  return <div data-testid="drop-form">{param}</div>;
+}
+
+mockDropForm.propTypes = {
+  param: PropTypes.string,
+};
+
+jest.mock('./DropForm', () => mockDropForm);
 
 describe('Conjuntos', () => {
   test('muestra la vista de agrupación y de inmueble', () => {

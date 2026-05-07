@@ -1,17 +1,65 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import EditarUsuario from './index';
 
-jest.mock('../Conjuntos/DropForm', () => ({ submited, param }) => (
-  <button onClick={() => submited({ id: 1, nombre: 'test' })}>{param}</button>
-));
-jest.mock('@mui/material/TextField', () => ({ label, value, ...props }) => (
-  <input aria-label={label || 'field'} value={value || ''} onChange={() => {}} {...props} />
-));
-jest.mock('@mui/material/Box', () => ({ children, component: C = 'div', ...props }) => <C {...props}>{children}</C>);
-jest.mock('@mui/material/Button', () => ({ children, ...props }) => <button {...props}>{children}</button>);
-jest.mock('@mui/material/Typography', () => ({ children }) => <h2>{children}</h2>);
-jest.mock('@mui/material/Grid', () => ({ children }) => <div>{children}</div>);
+function mockDropForm({ submited, param }) {
+  return <button onClick={() => submited({ id: 1, nombre: 'test' })}>{param}</button>;
+}
+
+mockDropForm.propTypes = {
+  submited: PropTypes.func,
+  param: PropTypes.string,
+};
+
+function mockTextField({ label, value, ...props }) {
+  return <input aria-label={label || 'field'} value={value || ''} onChange={() => {}} {...props} />;
+}
+
+mockTextField.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+function mockBox({ children, component: Component = 'div', ...props }) {
+  return <Component {...props}>{children}</Component>;
+}
+
+mockBox.propTypes = {
+  children: PropTypes.node,
+  component: PropTypes.elementType,
+};
+
+function mockButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockButton.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockTypography({ children }) {
+  return <h2>{children}</h2>;
+}
+
+mockTypography.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockGrid({ children }) {
+  return <div>{children}</div>;
+}
+
+mockGrid.propTypes = {
+  children: PropTypes.node,
+};
+
+jest.mock('../Conjuntos/DropForm', () => mockDropForm);
+jest.mock('@mui/material/TextField', () => mockTextField);
+jest.mock('@mui/material/Box', () => mockBox);
+jest.mock('@mui/material/Button', () => mockButton);
+jest.mock('@mui/material/Typography', () => mockTypography);
+jest.mock('@mui/material/Grid', () => mockGrid);
 jest.mock('@mui/icons-material/Send', () => () => <span>send</span>);
 
 // Suppress CSS import

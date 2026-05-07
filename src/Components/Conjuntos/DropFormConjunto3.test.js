@@ -1,31 +1,74 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import DropFormConjunto3 from './DropFormConjunto3';
 import axios from 'axios';
 
 jest.mock('axios');
 jest.mock('sweetalert2', () => ({ fire: jest.fn().mockResolvedValue({ isConfirmed: true }) }));
 
-jest.mock('@mui/material/Box', () => ({ children, component: Component = 'div', ...props }) => (
-  <Component {...props}>{children}</Component>
-));
-jest.mock('@mui/material/Button', () => ({ children, ...props }) => <button {...props}>{children}</button>);
-jest.mock('@mui/material/TextField', () => ({ label, onChange, ...props }) => (
-  <input aria-label={label} onChange={onChange} {...props} />
-));
-jest.mock('@mui/material/InputAdornment', () => ({ children }) => <span>{children}</span>);
-jest.mock('@mui/icons-material/Send', () => () => <span>send</span>);
+function mockBox({ children, component: Component = 'div', ...props }) {
+  return <Component {...props}>{children}</Component>;
+}
 
-jest.mock('./DropFormConjunto2', () => (props) => (
-  <div>
-    <button type="button" onClick={() => props.submited({ idItem: 'agr-1', nItem: '2' })}>
-      select agrupacion
-    </button>
-    <button type="button" onClick={() => props.submited({ idItem: 'inm-1', nItem: '4' })}>
-      select inmueble
-    </button>
-  </div>
-));
+mockBox.propTypes = {
+  children: PropTypes.node,
+  component: PropTypes.elementType,
+};
+
+function mockButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockButton.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockTextField({ label, onChange, ...props }) {
+  return <input aria-label={label} onChange={onChange} {...props} />;
+}
+
+mockTextField.propTypes = {
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
+function mockInputAdornment({ children }) {
+  return <span>{children}</span>;
+}
+
+mockInputAdornment.propTypes = {
+  children: PropTypes.node,
+};
+
+function mockSend() {
+  return <span>send</span>;
+}
+
+jest.mock('@mui/material/Box', () => mockBox);
+jest.mock('@mui/material/Button', () => mockButton);
+jest.mock('@mui/material/TextField', () => mockTextField);
+jest.mock('@mui/material/InputAdornment', () => mockInputAdornment);
+jest.mock('@mui/icons-material/Send', () => mockSend);
+
+function mockDropFormConjunto2({ submited }) {
+  return (
+    <div>
+      <button type="button" onClick={() => submited({ idItem: 'agr-1', nItem: '2' })}>
+        select agrupacion
+      </button>
+      <button type="button" onClick={() => submited({ idItem: 'inm-1', nItem: '4' })}>
+        select inmueble
+      </button>
+    </div>
+  );
+}
+
+mockDropFormConjunto2.propTypes = {
+  submited: PropTypes.func,
+};
+
+jest.mock('./DropFormConjunto2', () => mockDropFormConjunto2);
 
 describe('DropFormConjunto3', () => {
   beforeEach(() => {

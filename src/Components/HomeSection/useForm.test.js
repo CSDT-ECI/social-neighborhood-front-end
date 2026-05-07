@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import useForm from './useForm';
 
 const FormHarness = ({ callback }) => {
@@ -13,6 +14,10 @@ const FormHarness = ({ callback }) => {
       <button type="submit">submit</button>
     </form>
   );
+};
+
+FormHarness.propTypes = {
+  callback: PropTypes.func,
 };
 
 describe('useForm', () => {

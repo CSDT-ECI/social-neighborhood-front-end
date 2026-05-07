@@ -18,7 +18,6 @@
   
   .form h1 {
     font-size: 1rem;
-    text-align: start;
     width: 80%;
     margin-bottom: 1rem;
     color: #fff;
@@ -75,7 +74,7 @@
     );
     outline: none;
     border: none;
-    color: #fff;
+    color: #06253a;
     font-size: 1rem;
   }
   .wrong{

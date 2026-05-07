@@ -1,15 +1,41 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import DropFormConjunto from './DropFormConjunto';
 import axios from 'axios';
 
 jest.mock('axios');
 jest.mock('sweetalert2', () => ({ fire: jest.fn() }));
-jest.mock('@mui/material/TextField', () => ({ label, value, disabled, ...props }) => (
-  <input aria-label={label || 'field'} value={value || ''} readOnly={disabled} onChange={() => {}} {...props} />
-));
-jest.mock('@mui/material/Box', () => ({ children, component: C = 'div', ...props }) => <C {...props}>{children}</C>);
-jest.mock('@mui/material/Button', () => ({ children, ...props }) => <button {...props}>{children}</button>);
+function mockTextField({ label, value, disabled, ...props }) {
+  return <input aria-label={label || 'field'} value={value || ''} readOnly={disabled} onChange={() => {}} {...props} />;
+}
+
+mockTextField.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  disabled: PropTypes.bool,
+};
+
+function mockBox({ children, component: Component = 'div', ...props }) {
+  return <Component {...props}>{children}</Component>;
+}
+
+mockBox.propTypes = {
+  children: PropTypes.node,
+  component: PropTypes.elementType,
+};
+
+function mockButton({ children, ...props }) {
+  return <button {...props}>{children}</button>;
+}
+
+mockButton.propTypes = {
+  children: PropTypes.node,
+};
+
+jest.mock('@mui/material/TextField', () => mockTextField);
+jest.mock('@mui/material/Box', () => mockBox);
+jest.mock('@mui/material/Button', () => mockButton);
 jest.mock('@mui/icons-material/Send', () => () => <span>send</span>);
 
 describe('DropFormConjunto', () => {
