@@ -10,9 +10,7 @@ import SaveTwoToneIcon from '@mui/icons-material/SaveTwoTone';
 import IconButton from '@mui/material/IconButton';
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 import PropTypes from 'prop-types';
-const defaultState = {
-    numero:''
-}
+const createRow = () => ({ numero: '', _id: Math.random() });
 function RowInput ({onChange,onRemove,type,numero}){
     return(
         <Box textAlign='center' >
@@ -41,7 +39,7 @@ RowInput.propTypes = {
     numero: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 const DinamicForm = ({name,type,toggleNext}) => {
-    const [rows, setRows] = useState([defaultState]);
+    const [rows, setRows] = useState([createRow()]);
 
     const handleOnChange = (index, name, value) => {
         const copyRows = [...rows];
@@ -53,7 +51,7 @@ const DinamicForm = ({name,type,toggleNext}) => {
       };
     
     const handleOnAdd = () => {
-    setRows(rows.concat(defaultState));
+    setRows(rows.concat(createRow()));
     };
 
     const handleOnRemove = index => {
@@ -67,7 +65,7 @@ const DinamicForm = ({name,type,toggleNext}) => {
         const data = new FormData(event.currentTarget);
         // iterar por cada columna y enviar al back
         console.log(data);
-        setRows([defaultState]);
+        setRows([createRow()]);
         toggleNext()
 
     };
@@ -81,7 +79,7 @@ const DinamicForm = ({name,type,toggleNext}) => {
                         {...row}
                         onChange={(name, value) => handleOnChange(index, name, value)}
                         onRemove={() => handleOnRemove(index)}
-                        key={index}
+                        key={row._id}
                         name={name}
                         type={type}
                         />
@@ -96,5 +94,11 @@ const DinamicForm = ({name,type,toggleNext}) => {
         </Box>
     )
 }
+
+DinamicForm.propTypes = {
+    name: PropTypes.string,
+    type: PropTypes.string,
+    toggleNext: PropTypes.func,
+};
 
 export default DinamicForm

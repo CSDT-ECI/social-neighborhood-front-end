@@ -5,28 +5,31 @@ const mockSet = jest.fn().mockResolvedValue(undefined);
 const mockPut = jest.fn().mockResolvedValue(undefined);
 const mockGetDownloadURL = jest.fn().mockResolvedValue('http://files.test/image.png');
 
+const mockSnapshotDocs = [
+  { id: '1', data: () => ({ rol: 'Administrador', texto: 'ignored admin' }) },
+  { id: '2', data: () => ({ rol: 'Residente', texto: 'resident post' }) },
+];
+
+const mockFirestoreOnSnapshot = (cb) => {
+  cb({ forEach: (fn) => mockSnapshotDocs.forEach((doc) => fn(doc)) });
+  return jest.fn();
+};
+
 jest.mock('../../useDate', () => ({
   useDate: () => ({ date: 'Friday, 2 January', time: '9:30 AM' }),
 }));
 
-jest.mock('../Post', () => ({ data }) => <div data-testid="post">{data.texto}</div>);
+jest.mock('../Post', () => {
+  const PropTypes = require('prop-types');
+  const PostMock = ({ data }) => <div data-testid="post">{data.texto}</div>;
+  PostMock.propTypes = { data: PropTypes.shape({ texto: PropTypes.string }) };
+  return PostMock;
+});
 
 jest.mock('../../firebase/firebaseConfig', () => ({
   db: {
     collection: () => ({
-      orderBy: () => ({
-        onSnapshot: (cb) => {
-          cb({
-            forEach: (iterate) => {
-              [
-                { id: '1', data: () => ({ rol: 'Administrador', texto: 'ignored admin' }) },
-                { id: '2', data: () => ({ rol: 'Residente', texto: 'resident post' }) },
-              ].forEach(iterate);
-            },
-          });
-          return jest.fn();
-        },
-      }),
+      orderBy: () => ({ onSnapshot: mockFirestoreOnSnapshot }),
       doc: () => ({ set: (data) => { mockSet(data); return Promise.resolve(); } }),
     }),
   },

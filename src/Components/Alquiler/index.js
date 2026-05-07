@@ -26,14 +26,14 @@ const handleSubmit = (event) => {
     let body={
         idZonaComun:current.idZonaComun,
         idunidaddeviviendausuario:vivienda.idunidaddevivienda,
-        iniciodealquiler: parseInt((new Date(value2+' '+current.iniciodealquiler).getTime()/1000).toFixed(0)),
-        findealquiler: parseInt((new Date(value2+' '+current.findealquiler.split(' ')[1])/1000).toFixed(0)),
+        iniciodealquiler: Number.parseInt((new Date(value2+' '+current.iniciodealquiler).getTime()/1000).toFixed(0)),
+        findealquiler: Number.parseInt((new Date(value2+' '+current.findealquiler.split(' ')[1])/1000).toFixed(0)),
         costo:current.findealquiler.split(' ')[2],
         pagado: true,
         cancelado:false
     }
     console.log(body)
-    let url = `${window.$dir}client/newAlquiler/${body.iniciodealquiler}/${body.findealquiler}/${body.idZonaComun}/${conjunto.idconjunto}/${user.id}/${body.idunidaddeviviendausuario}/${body.costo}`;
+    let url = `${globalThis.$dir}client/newAlquiler/${body.iniciodealquiler}/${body.findealquiler}/${body.idZonaComun}/${conjunto.idconjunto}/${user.id}/${body.idunidaddeviviendausuario}/${body.costo}`;
     console.log(url);
     axios.post(url)
     .then( function (response) {
@@ -43,14 +43,12 @@ const handleSubmit = (event) => {
         Swal.fire(
             'Alquilado! :)',
             'No olvides compartir este evento con tus amigos'
-            ).then((result) => {
-                if (result.isConfirmed) {
-                } });
+            );
         } else {
         Swal.fire("Something is Wrong :(!", "try again later", "error");
         }                                                               
     })
-    .catch(function (errorx) {
+    .catch(function (error_) {
         Swal.fire("No es posible hacer el alquiler! :(!", "intenta con otro horario", "error");
     });
 };
@@ -81,7 +79,7 @@ const handleOnChange = (name, value) => {
     const [value2, setValue2] = useState('2021-12-01');
     const handleChange2 = (newValue) => {
         const today = new Date(newValue)
-        let currentMonth = parseInt(today.getMonth()+1);
+        let currentMonth = Number.parseInt(today.getMonth()+1);
         let currentDay = today.getDate();
         if (currentMonth<10) currentMonth='0'+currentMonth;
         if (currentDay<10) currentDay='0'+currentDay;

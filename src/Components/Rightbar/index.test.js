@@ -4,40 +4,38 @@ import Rightbar from './index';
 
 const mockUnsubscribe = jest.fn();
 
+const mockRightbarDocs = [
+  {
+    id: '1',
+    data: () => ({
+      rol: 'Administrador',
+      texto: 'admin post',
+      nombreUsuario: 'A',
+      apellidoUsuario: 'B',
+      fechaPublicacion: 1,
+    }),
+  },
+  {
+    id: '2',
+    data: () => ({
+      rol: 'Residente',
+      texto: 'res post',
+      nombreUsuario: 'C',
+      apellidoUsuario: 'D',
+      fechaPublicacion: 2,
+    }),
+  },
+];
+
+const mockRightbarOnSnapshot = (cb) => {
+  cb({ forEach: (fn) => mockRightbarDocs.forEach((doc) => fn(doc)) });
+  return mockUnsubscribe;
+};
+
 jest.mock('../../firebase/firebaseConfig', () => ({
   db: {
     collection: () => ({
-      orderBy: () => ({
-        onSnapshot: (cb) => {
-          cb({
-            forEach: (iterate) => {
-              [
-                {
-                  id: '1',
-                  data: () => ({
-                    rol: 'Administrador',
-                    texto: 'admin post',
-                    nombreUsuario: 'A',
-                    apellidoUsuario: 'B',
-                    fechaPublicacion: 1,
-                  }),
-                },
-                {
-                  id: '2',
-                  data: () => ({
-                    rol: 'Residente',
-                    texto: 'res post',
-                    nombreUsuario: 'C',
-                    apellidoUsuario: 'D',
-                    fechaPublicacion: 2,
-                  }),
-                },
-              ].forEach(iterate);
-            },
-          });
-          return mockUnsubscribe;
-        },
-      }),
+      orderBy: () => ({ onSnapshot: mockRightbarOnSnapshot }),
     }),
   },
 }));

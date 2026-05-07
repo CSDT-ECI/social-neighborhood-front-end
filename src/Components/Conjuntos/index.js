@@ -37,6 +37,18 @@ const Conjuntos = ({user, conjunto}) => {
         setIsAgrupacion(false);
         setIsInmueble(false);
         }
+    const renderForm = () => {
+        if (isAgrupacion) {
+            return <DropForm param='TipoAgrupacionesGeneral' param2="newTipoAgrupacion"
+                     location='admin' submited={handleNext}
+                     enableSubmit={true} currentConjunto={conjunto} currentUsuario={user} />;
+        }
+        if (isInmueble) {
+            return <DropForm param='TipoInmueblesGeneral' param2="newInmueble"
+                    location='admin' enableSubmit={true} submited={handleDisabled} currentConjunto={conjunto} currentUsuario={user} />;
+        }
+        return <div></div>;
+    };
     return (
         <Box sx={{  flexGrow: 1,mx:0 }} className="card">
         <Typography variant="h4" align="center" component="h1" gutterBottom>Conjuntos</Typography>
@@ -60,18 +72,7 @@ const Conjuntos = ({user, conjunto}) => {
                        <div></div>
                    <br/>
                    <br/>
-                    {
-                        isAgrupacion? 
-                        <DropForm param='TipoAgrupacionesGeneral' param2="newTipoAgrupacion"
-                                 location='admin' submited={handleNext}  
-                                 enableSubmit={true} currentConjunto ={conjunto} currentUsuario={user} />
-                        :
-                        isInmueble?
-                        <DropForm param='TipoInmueblesGeneral' param2="newInmueble" 
-                                location='admin'enableSubmit={true} submited={handleDisabled} currentConjunto ={conjunto} currentUsuario={user} />   
-                        :
-                        <div></div>
-                    }
+                    {renderForm()}
                 </Grid> 
                 <Grid item xs={6}>
                 <Paper >  

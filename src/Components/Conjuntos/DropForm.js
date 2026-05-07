@@ -13,15 +13,28 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 
+const getElementId = (element) => {
+    if (element.id) return element.id;
+    if (element.horainicio) return element.horainicio;
+    return element.horafin;
+};
+
+const getElementLabel = (element) => {
+    if (element.nombre) return element.nombre;
+    if (element.horainicio) return element.horainicio;
+    if (element.horafin) return element.horafin;
+    return `${element.nombres} ${element.apellidos}`;
+};
+
 const DropForm = ({param,param2,param3,stringStr,
                     location,location2,
                     onChange,enableSubmit,submited,isenable,
                     currentConjunto,currentUsuario,currentVivienda,
                     level}) => {
-    const [datas,setDatas] = useState([]);
-    const [currentItem,setCurrentItem] = useState(0);
-    const [loading,setIsloading] =useState(false);
-    const [enablesubmit2,sertenablesubmit2] =useState(false);
+    const [datas, setDatas] = useState([]);
+    const [currentItem, setCurrentItem] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [enablesubmit2, setEnablesubmit2] = useState(false);
 
     const getStringDataLocation = useCallback(() => {
         return currentUsuario?.tipoUsuario === 'Residente'
@@ -29,7 +42,7 @@ const DropForm = ({param,param2,param3,stringStr,
             : `${currentConjunto.idconjunto}/${currentConjunto.idusuarioadministrador}/${currentConjunto.id}`;
     }, [currentUsuario, currentVivienda, currentConjunto]);
 
-    const baseDir = (typeof window !== 'undefined' && window.$dir) || '';
+    const baseDir = globalThis.$dir || '';
 
     const buildRequestBody = useCallback(() => {
         if (param2 === "newTipoAgrupacion") {
@@ -53,48 +66,48 @@ const DropForm = ({param,param2,param3,stringStr,
             'success'
         ).then((result) => {
             if (result.isConfirmed) {
-                setIsloading(false);
+                setLoading(false);
                 submited();
             }
         });
     }, [submited]);
 
     const handleSubmitError = useCallback((error_) => {
-        setIsloading(false);
+        setLoading(false);
         Swal.fire(
             "Este tipo ya existe en tu conjunto" + String(error_),
             "Intenta con otro tipo",
             "error"
         );
     }, []);
-    const Togglesubmit2 =(val = true)=>{
-        sertenablesubmit2(val)
-    }
-    const fetchData = useCallback(async () => {
-            let currentstr = getStringDataLocation();
-            if(stringStr)currentstr='';
 
-            await axios.get(baseDir + location + `/${param}/${currentstr}`)
-            .then( (res) =>{ setDatas(res.data)
-            }).catch(
-                (error_) =>{console.log("Error: :c "+error_)}
-            )
-        },[baseDir, param, location, getStringDataLocation, stringStr])
-    useEffect(()=>{
-        fetchData()
-    },[fetchData])
-    const handleCurrentItem = (val) =>{
+    const Togglesubmit2 = (val = true) => {
+        setEnablesubmit2(val);
+    };
+
+    const fetchData = useCallback(async () => {
+        let currentstr = getStringDataLocation();
+        if (stringStr) currentstr = '';
+        await axios.get(baseDir + location + `/${param}/${currentstr}`)
+            .then((res) => { setDatas(res.data); })
+            .catch((error_) => { console.log("Error: :c " + error_); });
+    }, [baseDir, param, location, getStringDataLocation, stringStr]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const handleCurrentItem = (val) => {
         setCurrentItem(val);
-        if(isenable)submited(val);
-    }
+        if (isenable) submited(val);
+    };
+
     const handleSubmit = (event) => {
         Togglesubmit2();
         event.preventDefault();
-        setIsloading(true);
-        
+        setLoading(true);
         const body = buildRequestBody();
         const currentstr = getStringDataLocation();
-        
         console.log(body);
         axios.post(baseDir + location + `/${param2}/${currentstr}`, body)
             .then((response) => {
@@ -108,78 +121,87 @@ const DropForm = ({param,param2,param3,stringStr,
                 handleSubmitError(error_);
             });
     };
+
+    const renderItems = () => {
+        if (param === 'unidadesDeViviendaConjuto') {
+            return datas.map((element) => (
+                <MenuItem
+                    id={element.idunidaddevivienda}
+                    key={element.idunidaddevivienda}
+                    name={`${element.tipoinmueble} ${element.numinmueble} ${element.tipoagrupacion} ${element.numagrupacion}`}
+                    value={`${element.tipoinmueble} ${element.numinmueble} ${element.tipoagrupacion} ${element.numagrupacion}`}
+                    onClick={() => handleCurrentItem(element.idunidaddevivienda)}
+                >
+                    {`${element.tipoinmueble} ${element.numinmueble} ${element.tipoagrupacion} ${element.numagrupacion}`}
+                </MenuItem>
+            ));
+        }
+        if (!datas[0].fin) {
+            return datas.map((element) => (
+                <MenuItem
+                    id={getElementId(element)}
+                    key={getElementId(element)}
+                    name={getElementLabel(element)}
+                    value={getElementLabel(element)}
+                    onClick={() => handleCurrentItem(getElementId(element))}
+                >
+                    {getElementLabel(element)}
+                </MenuItem>
+            ));
+        }
+        return datas.map((element) => {
+            console.log(element);
+            return (
+                <MenuItem
+                    id={element.fin}
+                    key={element.fin}
+                    name={`${element.fin} ${element.costo}`}
+                    value={`${element.fin} ${element.costo}`}
+                    onClick={() => handleCurrentItem(`${element.fin} ${element.costo}`)}
+                >
+                    {`${element.fin} Costo: $${element.costo}`}
+                </MenuItem>
+            );
+        });
+    };
+
+    const renderSubmitButton = () => {
+        if (!enableSubmit) return null;
+        if (loading || datas.length === 0) {
+            return (
+                <Box textAlign='center'>
+                    <LoadingButton loading loadingPosition="start" startIcon={<CircularProgress size={14} />} variant="outlined">Loading..</LoadingButton>
+                </Box>
+            );
+        }
+        if (enablesubmit2) {
+            return (
+                <Box textAlign='center'>
+                    <Button type="submit" variant="contained" color="success" endIcon={<SendIcon />}>Confirmar</Button>
+                </Box>
+            );
+        }
+        return null;
+    };
+
     return (
         <div>
-                <div>
-                <Box component="form" onSubmit={handleSubmit} noValidate> 
-                {datas.length!==0?
-                    <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
-                        onChange={() => Togglesubmit2()} >
-                            {param==='unidadesDeViviendaConjuto'?
-                            datas?.map((element)=>{
-                                    return (
-                                        <MenuItem id={element.idunidaddevivienda} 
-                                                key ={element.idunidaddevivienda}
-                                                name={ element.tipoinmueble+' '+element.numinmueble+' '+element.tipoagrupacion+' '+element.numagrupacion} 
-                                                value={element.tipoinmueble+' '+element.numinmueble+' '+element.tipoagrupacion+' '+element.numagrupacion} 
-                                                onClick= {(e)=>{handleCurrentItem(element.idunidaddevivienda)}}
-                                                >
-                                            { element.tipoinmueble+' '+element.numinmueble+' '+element.tipoagrupacion+' '+element.numagrupacion}
-                                        </MenuItem>      
-                                    )                 
-                                }):
-                            (!datas[0].fin)?
-                            datas?.map((element)=>{
-                                    return (
-                                        <MenuItem id={element.id?element.id:element.horainicio?element.horainicio:element.horafin} 
-                                                key ={element.id?element.id:element.horainicio?element.horainicio:element.horafin}
-                                                name={ element.nombre?element.nombre:element.horainicio?element.horainicio:element.horafin?element.horafin:element.nombres+' '+element.apellidos} 
-                                                value={ element.nombre?element.nombre:element.horainicio?element.horainicio:element.horafin?element.horafin:element.nombres+' '+element.apellidos} 
-                                                onClick= {(e)=>{handleCurrentItem(element.id?element.id:element.horainicio?element.horainicio:element.horafin)}}
-                                                >
-                                            { element.nombre?element.nombre:element.horainicio?element.horainicio:element.horafin?element.horafin:element.nombres+' '+element.apellidos}
-                                        </MenuItem>      
-                                    )                 
-                                })
-                            :
-                            datas?.map((element)=>{
-                                console.log(element)
-                                    return (
-                                        <MenuItem id={element.fin} 
-                                                key ={element.fin}
-                                                name={element.fin+' '+element.costo} 
-                                                value={element.fin+' '+element.costo} 
-                                                onClick= {(e)=>{handleCurrentItem(element.fin+' '+element.costo)}}
-                                                >
-                                            {element.fin+' Costo: $'+element.costo}
-                                        </MenuItem>      
-                                    )                 
-                                })
-                            }
-                </TextField>
-                :<LoadingButton loading loadingPosition="start" variant="outlined">Loading..</LoadingButton>
+            <div>
+            <Box component="form" onSubmit={handleSubmit} noValidate>
+                {datas.length !== 0
+                    ? <TextField variant="outlined" id="select" name="prueba2" label={param} select required fullWidth
+                        onChange={() => Togglesubmit2()}>
+                            {renderItems()}
+                    </TextField>
+                    : <LoadingButton loading loadingPosition="start" variant="outlined">Loading..</LoadingButton>
                 }
-                {
-                enableSubmit?
-                <Box textAlign='center'>
-                    {
-                        loading || datas.length===0?
-                        <LoadingButton loading loadingPosition="start" startIcon={<CircularProgress size={14} />} variant="outlined">Loading..</LoadingButton>
-                        :
-                        enablesubmit2?
-                        <Button type="submit" variant="contained" color="success"endIcon={<SendIcon />}>Confirmar</Button>
-                        :<div></div>
-                    }
-                </Box>
-                :<div></div>
-                }
-                </Box>
-                </div>
-                <br/>
+                {renderSubmitButton()}
+            </Box>
+            </div>
+            <br/>
         </div>
-        
-    )
-}
+    );
+};
 
 DropForm.propTypes = {
     param: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
