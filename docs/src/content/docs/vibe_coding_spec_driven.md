@@ -1,3 +1,7 @@
+---
+title: "Vibe Coding + Spec-Driven Dev"
+---
+
 # Vibe Coding + Spec-Driven Development
 
 ## Objetivo
@@ -9,11 +13,11 @@ La meta es mantener un equilibrio entre **flujo creativo** y **calidad técnica 
 
 ## 1) Mapa General del Enfoque
 
-![Mapa General del Enfoque](../assets/flowchart_1.png)
+![Mapa General del Enfoque](/social-neighborhood-front-end/assets/flowchart_1.png)
 
 ## 2) Flujo Operativo Recomendado
 
-![Flujo Operativo Recomendado](../assets/flowchart_2.png)
+![Flujo Operativo Recomendado](/social-neighborhood-front-end/assets/flowchart_2.png)
 
 ## 3) Prácticas Clave
 
@@ -27,7 +31,7 @@ La meta es mantener un equilibrio entre **flujo creativo** y **calidad técnica 
 
 ## 4) Ventajas
 
-![Ventajas](../assets/flowchart_3.png)
+![Ventajas](/social-neighborhood-front-end/assets/flowchart_3.png)
 
 1. Entregas frecuentes con menor incertidumbre.
 2. Menor costo de cambio gracias a specs y tests.
@@ -36,7 +40,7 @@ La meta es mantener un equilibrio entre **flujo creativo** y **calidad técnica 
 
 ## 5) Retos y Riesgos
 
-![Retos y Riesgos](../assets/flowchart_4.png)
+![Retos y Riesgos](/social-neighborhood-front-end/assets/flowchart_4.png)
 
 ### Mitigaciones sugeridas
 - Definir plantilla mínima de spec por historia.
@@ -55,7 +59,7 @@ La meta es mantener un equilibrio entre **flujo creativo** y **calidad técnica 
 
 ## 7) Flujo de Gobernanza Ligera
 
-![Flujo de Gobernanza Ligera](../assets/flowchart_5.png)
+![Flujo de Gobernanza Ligera](/social-neighborhood-front-end/assets/flowchart_5.png)
 
 ## 8) Recomendaciones de Adopción
 

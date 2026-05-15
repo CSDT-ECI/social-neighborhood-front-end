@@ -1,3 +1,7 @@
+---
+title: "Problemas de Arquitectura"
+---
+
 # Problemas de Arquitectura
 
 ## Tabla de Contenidos
@@ -29,4 +33,4 @@
 - **Impacto**: El estado compartido es difícil de gestionar y sincronizar entre componentes.
 - **Recomendación**: Introducir una solución de gestión de estado global (por ejemplo, Redux, Context API).
 
-[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+[⬅ Volver al Índice Principal](./)

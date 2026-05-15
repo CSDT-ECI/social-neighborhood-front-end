@@ -1,3 +1,7 @@
+---
+title: "Architectural Smells"
+---
+
 # Architectural Smells — social-neighborhood-front-end
 
 ## 1) URLs y configuración repartidas (configuración “esparcida”)

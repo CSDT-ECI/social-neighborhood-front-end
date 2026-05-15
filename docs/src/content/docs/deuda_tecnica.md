@@ -1,3 +1,7 @@
+---
+title: "Testing Debt"
+---
+
 # Testing Debt en `social-neighborhood-front-end`
 
 En este documento se describen las prácticas de *testing debt* identificadas en el proyecto, junto con ejemplos específicos.

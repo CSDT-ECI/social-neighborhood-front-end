@@ -1,3 +1,7 @@
+---
+title: "Prácticas XP y Backlog"
+---
+
 # Prácticas XP y Backlog de Acciones
 
 ## Tabla de Contenidos
@@ -42,4 +46,4 @@
 5. *Eliminar artefactos que no aportan al front* (si no son necesarios).
 6. *No versionar build/* si se confirma que es output generado.
 
-[⬅ Volver al Índice Principal](../INFORME_DEUDA_TECNICA_CSDT-2026.md)
+[⬅ Volver al Índice Principal](./)
